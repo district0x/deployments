@@ -6,7 +6,6 @@ This project contains docker and docker compose files for deploying qa and produ
 
 You need [Docker](https://www.docker.com/) installed.
 
-Start by pulling the dependencies:
 ```bash
 sudo apt-get install \
     apt-transport-https \
@@ -47,7 +46,7 @@ sudo chmod a+x /usr/local/bin/docker-compose
 
 ## Usage
 
-If you want to create a qa environment for [MemeFactory](https://github.com/district0x/memefactory)
+If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory)
 
 ```bash
 cd memefactory/qa

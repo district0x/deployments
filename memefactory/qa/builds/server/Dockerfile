@@ -5,9 +5,9 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 8.4.0
 ENV LEIN_ROOT=1
-#ENV CONFIG ~/meme.config.qa.edn
+ENV CONFIG meme.config.qa.edn
 
-#ADD meme.config.qa.edn ~/meme.config.qa.edn
+ADD meme.config.qa.edn meme.config.qa.edn
 
 # install system-wide deps
 RUN apt-get update -y \
@@ -43,11 +43,6 @@ RUN . $NVM_DIR/nvm.sh \
 # add node and npm to PATH
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-
-# confirm installation
-# RUN node -v
-# RUN npm -v
-# RUN lein -v
 
 # get server source code
 RUN wget --no-check-certificate -O master.zip https://github.com/district0x/memefactory/archive/master.zip \
