@@ -6,6 +6,9 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 8.4.0
 ENV LEIN_ROOT=1
+ENV CONFIG ~/meme.config.qa.edn
+
+ADD meme.config.qa.edn ~/meme.config.qa.edn
 
 # install system-wide deps
 RUN apt-get update -y \
@@ -56,10 +59,9 @@ WORKDIR memefactory
 
 # build server
 RUN npm config set package-lock false
-#RUN lein deps
 RUN lein npm install
 RUN lein solc once
-RUN lein cljsbuild once "server"
+RUN lein cljsbuild once "dev-server"
 
 EXPOSE 6300
-CMD ["node", "server/memefactory.js"]
+CMD ["node", "dev-server/memefactory.js"]

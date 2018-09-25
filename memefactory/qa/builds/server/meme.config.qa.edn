@@ -1,0 +1,3 @@
+{:logging {:level "debug"
+           :console? true}
+  :web3 {:port 8549}}

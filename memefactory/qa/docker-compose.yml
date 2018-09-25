@@ -3,9 +3,9 @@ services:
 
   parity:
     image: parity/parity:latest
-    container_name: parity-qa
+    container_name: qa_parity
     ports:
-      - 8545:8545
+      - 8549:8549
       - 8180:8180
       - 8546:8546
       - 30303:30303
@@ -13,7 +13,7 @@ services:
       # TODO re-use synced data
       - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
     networks:
-      memefactory-net-qa:
+      memefactory-net:
     command:
       --chain ropsten
       --base-path /root/.local/share/io.parity.ethereum/
@@ -21,11 +21,11 @@ services:
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-cors '*'
-      --jsonrpc-port 8545
+      --jsonrpc-port 8549
 
   ipfs:
     image: jbenet/go-ipfs:latest
-    container_name: ipfs-qa
+    container_name: qa_ipfs
     ports:
       - 8080:8080
       - 4001:4001
@@ -34,7 +34,7 @@ services:
 #      - /tmp/ipfs-docker-staging:/export # staging is a directory you can use for staging files for command line usage (such as ipfs add)
       - /tmp/ipfs-docker-data:/data/ipfs # data volume is used to store the IPFS local repo (config and database)
     networks:
-      memefactory-net-qa:
+      memefactory-net:
 
   server:
     build: builds/server
@@ -45,7 +45,7 @@ services:
     ports:
       - 6300:6300
     networks:
-      memefactory-net-qa:
+      memefactory-net:
 
 networks:
   memefactory-net:
