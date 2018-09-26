@@ -9,8 +9,7 @@ RUN wget --no-check-certificate -O master.zip https://github.com/district0x/meme
 WORKDIR memefactory
 
 # build ui
-RUN npm config set package-lock false
-RUN lein npm install
+RUN lein deps
 RUN lein cljsbuild once "dev-ui"
 
 # TODO : upload to ipns

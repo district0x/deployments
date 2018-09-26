@@ -2,16 +2,15 @@ version: "3"
 services:
 
   parity:
-    image: parity/parity:latest
+    image: parity/parity:stable
     container_name: qa_parity
     ports:
-      - 8545:8545
-      - 8180:8180
-      - 8546:8546
-      - 30303:30303
-      - 30303:30303/udp
+      - 0.0.0.0:8545:8545
+      # - 8180:8180
+      # - 8546:8546
+      # - 30303:30303
+      # - 30303:30303/udp
     volumes:
-      # TODO re-use synced data
       - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
     networks:
       - memefactory-net
@@ -38,16 +37,16 @@ services:
 #     networks:
 #       - memefactory-net
 
-#   server:
-#     build: builds/server
-#     container_name: qa_memefactory-server
-#     depends_on:
-#       - ipfs
-#       - parity
-#     ports:
-#       - 6300:6300
-#     networks:
-#       - memefactory-net
+  server:
+    build: builds/server
+    container_name: qa_memefactory-server
+    depends_on:
+#      - ipfs
+      - parity
+    ports:
+      - 6300:6300
+    networks:
+      - memefactory-net
 
 networks:
   memefactory-net:

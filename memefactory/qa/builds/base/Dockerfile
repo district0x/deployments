@@ -41,6 +41,10 @@ RUN . $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+# seems to fix the checksum problem
+# see https://stackoverflow.com/questions/47545940/npm-err-code-eintegrity-npm-5-3-0
+RUN npm config set package-lock false
+
 RUN java -version
 RUN solc --version
 RUN lein --version
