@@ -46,7 +46,18 @@ sudo chmod a+x /usr/local/bin/docker-compose
 
 ## Usage
 
-If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory)
+#### <a name="base"> Base docker image
+
+This iamge comes with all the common dependencies and serves as the base for all other builds:
+
+```bash
+cd memefactory/qa
+docker build -t district0x/base builds/base
+```
+
+#### <a name="memefactory-qa"> 
+
+If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory):
 
 ```bash
 cd memefactory/qa
