@@ -5,11 +5,11 @@ services:
     image: parity/parity:stable
     container_name: qa_parity
     ports:
-      - 0.0.0.0:8545:8545
-      # - 8180:8180
-      # - 8546:8546
-      # - 30303:30303
-      # - 30303:30303/udp
+      - "0.0.0.0:8545:8545"
+      # - "8180:8180"
+      # - "8546:8546"
+      # - "30303:30303"
+      # - "30303:30303/udp"
     volumes:
       - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
     networks:
@@ -44,12 +44,13 @@ services:
 #      - ipfs
       - parity
     ports:
-      - 6300:6300
+      - "6300:6300"
     networks:
       - memefactory-net
 
 networks:
   memefactory-net:
+    driver: "bridge"
 
 # volumes:
 #   parity-volume:

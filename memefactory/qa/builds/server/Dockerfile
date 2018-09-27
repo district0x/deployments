@@ -13,6 +13,8 @@ RUN wget --no-check-certificate -O master.zip https://github.com/district0x/meme
 
 WORKDIR memefactory
 
+RUN npm config set package-lock false
+
 # build server
 RUN lein deps
 RUN lein solc once
