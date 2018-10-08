@@ -5,7 +5,7 @@ server {
   set $peer_id QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj;
 
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {
-    rewrite /(contracts|images|js|css|fonts)(.*) /ipns/$peer_id/$1$2 break;
+    rewrite /(contracts|images|js|css|fonts|assets)(.*) /ipns/$peer_id/$1$2 break;
     try_files $uri @ipfs;
   }
 
@@ -23,7 +23,7 @@ server {
     proxy_intercept_errors on;
     proxy_pass http://qa_ipfs:8080;
 
-    # DEBUG : HIT | BYPASS 
+    # DEBUG header
     add_header X-Ipfs-Url http://qa_ipfs:8080;
 
   }

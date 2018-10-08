@@ -14,8 +14,6 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
 # TODO : ipfs publish
 
-# TODO : nginx
-
 # install nginx
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \

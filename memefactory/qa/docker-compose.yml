@@ -1,27 +1,27 @@
 version: "3"
 services:
 
-  # parity:
-  #   image: parity/parity:stable
-  #   container_name: qa_parity
-  #   ports:
-  #     - "0.0.0.0:8545:8545"
-  #     # - "8180:8180"
-  #     # - "8546:8546"
-  #     # - "30303:30303"
-  #     # - "30303:30303/udp"
-  #   volumes:
-  #     - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
-  #   networks:
-  #     - memefactory-net
-  #   command:
-  #     --chain ropsten
-  #     --base-path /root/.local/share/io.parity.ethereum/
-  #     --jsonrpc-apis 'web3,eth,net,parity,personal'
-  #     --jsonrpc-interface all
-  #     --jsonrpc-hosts all
-  #     --jsonrpc-cors '*'
-  #     --jsonrpc-port 8545
+  parity:
+    image: parity/parity:stable
+    container_name: qa_parity
+    ports:
+      - 8549:8549
+      # - "8180:8180"
+      # - "8546:8546"
+      # - "30303:30303"
+      # - "30303:30303/udp"
+    volumes:
+      - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
+    networks:
+      - memefactory-net
+    command:
+      --chain ropsten
+      --base-path /root/.local/share/io.parity.ethereum/
+      --jsonrpc-apis 'web3,eth,net,parity,personal'
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-cors '*'
+      --jsonrpc-port 8549
 
   ipfs:
     image: jbenet/go-ipfs:latest
@@ -29,31 +29,32 @@ services:
     ports:
       - 8080:8080
       - 4001:4001
-      - 5001:5001
-#      - 127.0.0.1:5001:5001
+#      - 5001:5001
+      - 127.0.0.1:5001:5001
     volumes:
 #      - /tmp/ipfs-docker-staging:/export # staging is a directory you can use for staging files for command line usage (such as ipfs add)
       - /tmp/ipfs-docker-data:/data/ipfs # data volume is used to store the IPFS local repo (config and database)
     networks:
       - memefactory-net
 
-#   server:
-#     build: builds/server
-#     container_name: qa_memefactory-server
-#     depends_on:
-# #      - ipfs
-#       - parity
-#     ports:
-#       - "6300:6300"
-#     networks:
-#       - memefactory-net
+  server:
+    build: builds/server
+    container_name: qa_memefactory-server
+    depends_on:
+      - ipfs
+      - parity
+    ports:
+      - 6300:6300
+    networks:
+      - memefactory-net
 
   ui:
     build: builds/ui
     container_name: qa_memefactory-ui
     depends_on:
       - ipfs
-#      - parity
+      - parity
+      - server
     ports:
       - 80:80
     networks:
