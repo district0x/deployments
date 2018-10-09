@@ -24,16 +24,15 @@ services:
       --jsonrpc-port 8549
 
   ipfs:
-    image: jbenet/go-ipfs:latest
+    build: builds/ipfs
     container_name: qa_ipfs
     ports:
       - 8080:8080
       - 4001:4001
-#      - 5001:5001
       - 127.0.0.1:5001:5001
-    volumes:
+#    volumes:
 #      - /tmp/ipfs-docker-staging:/export # staging is a directory you can use for staging files for command line usage (such as ipfs add)
-      - /tmp/ipfs-docker-data:/data/ipfs # data volume is used to store the IPFS local repo (config and database)
+ #     - /tmp/ipfs-docker-data:/data/ipfs # data volume is used to store the IPFS local repo (config and database)
     networks:
       - memefactory-net
 
@@ -51,10 +50,10 @@ services:
   ui:
     build: builds/ui
     container_name: qa_memefactory-ui
-    depends_on:
-      - ipfs
-      - parity
-      - server
+   depends_on:
+     - ipfs
+     - parity
+     - server
     ports:
       - 80:80
     networks:

@@ -2,7 +2,7 @@ server {
   listen 80;
   server_name localhost;
 
-  set $peer_id QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj;
+  set $peer_id QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
 
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {
     rewrite /(contracts|images|js|css|fonts|assets)(.*) /ipns/$peer_id/$1$2 break;
