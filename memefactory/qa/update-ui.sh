@@ -10,6 +10,7 @@ cd memefactory/
 # build ui
 lein deps
 lein cljsbuild once "dev-ui"
+lein garden once
 
 # publish new UI content
 #ipfs add -r resources/public
@@ -20,7 +21,8 @@ echo "IPFS hash: $HASH"
 ipfs name publish --lifetime "99999h" --ttl "99999h" --key=memefactory-qa $HASH
 
 # clean up
-rm -rf master.zip memefactory
+cd ../
+rm -rf master.zip memefactory/
 
 echo "Done"
 exit $?

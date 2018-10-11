@@ -48,7 +48,7 @@ sudo chmod a+x /usr/local/bin/docker-compose
 
 #### <a name="base"> Base docker image
 
-This iamge comes with all the common dependencies and serves as the base for all other builds:
+This image comes with all the common dependencies and serves as the base for all other builds:
 
 ```bash
 cd memefactory/qa
@@ -58,8 +58,14 @@ docker build -t district0x/base builds/base
 #### <a name="memefactory-qa"> 
 
 If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory):
+Start by building the ipfs image, you need to pass the private key corresponding to the node peer id:
+
+```bash
+docker build -t qa_ipfs builds/ipfs --build-arg ipfs_prv_key="$(cat ~/.ipfs/keystore/memefactory-qa)"
+```
+**Warning:** It is important to keep the image public, due to the stored secret!
 
 ```bash
 cd memefactory/qa
-docker-compose up
+docker-compose up 
 ```

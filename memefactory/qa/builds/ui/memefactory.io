@@ -2,7 +2,7 @@ server {
   listen 80;
   server_name localhost;
 
-  set $peer_id QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
+  set $peer_id QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj; # QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
 
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {
     rewrite /(contracts|images|js|css|fonts|assets)(.*) /ipns/$peer_id/$1$2 break;
@@ -21,10 +21,11 @@ server {
 
   location @ipfs {
     proxy_intercept_errors on;
-    proxy_pass http://qa_ipfs:8080;
+#    proxy_pass http://ipfs.io;
+   proxy_pass http://qa_ipfs:8080;
 
     # DEBUG header
-    add_header X-Ipfs-Url http://qa_ipfs:8080;
+#   add_header X-Ipfs-Url $ipfs_url;
 
   }
 
