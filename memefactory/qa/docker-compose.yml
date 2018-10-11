@@ -51,7 +51,7 @@ services:
   ui:
     build: builds/ui
     container_name: qa_memefactory-ui
-   depends_on:
+    depends_on:
      - ipfs
      - parity
      - server
@@ -63,6 +63,3 @@ services:
 networks:
   memefactory-net:
     driver: "bridge"
-
-# volumes:
-#   parity-volume:
