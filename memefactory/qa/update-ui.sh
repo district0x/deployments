@@ -9,11 +9,10 @@ cd memefactory/
 
 # build ui
 lein deps
-lein cljsbuild once "dev-ui"
 lein garden once
+lein cljsbuild once "ui"
 
 # publish new UI content
-#ipfs add -r resources/public
 HASH=$(ipfs add -r resources/public/ |  tail -1 | grep -o -P '(?<=added).*(?=public)')
 
 echo "IPFS hash: $HASH"

@@ -18,7 +18,7 @@ RUN npm config set package-lock false
 # build server
 RUN lein deps
 RUN lein solc once
-RUN lein cljsbuild once "dev-server"
+RUN lein cljsbuild once "server"
 
 EXPOSE 6300
 CMD ["node", "dev-server/memefactory.js"]

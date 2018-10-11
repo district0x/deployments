@@ -1,4 +1,4 @@
 {:logging {:level "debug"
            :console? true}
- :web3 {:url "http://qa_parity:8549"}
+ :web3 {:url "http://qa_parity:8545"}
  :ipfs {:host "qa_ipfs:5001" :endpoint "/api/v0" :gateway "qa_ipfs:8080/ipfs"}}

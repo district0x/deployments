@@ -5,7 +5,7 @@ services:
     image: parity/parity:stable
     container_name: qa_parity
     ports:
-      - 8549:8549
+      - 8545:8545
       # - "8180:8180"
       # - "8546:8546"
       # - "30303:30303"
@@ -21,7 +21,7 @@ services:
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-cors '*'
-      --jsonrpc-port 8549
+      --jsonrpc-port 8545
 
   ipfs:
 #   build: builds/ipfs
