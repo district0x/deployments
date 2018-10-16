@@ -21,6 +21,9 @@ services:
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-cors '*'
+      --cache-size 1024
+      --db-compaction ssd
+      --mode active
       --jsonrpc-port 8545
 
   ipfs:
