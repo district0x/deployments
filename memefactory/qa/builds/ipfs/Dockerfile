@@ -11,7 +11,7 @@ RUN test -n "$IPFS_PRV_KEY"
 RUN wget --no-check-certificate https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz
 RUN tar xvfz go-ipfs_v0.4.17_linux-amd64.tar.gz
 WORKDIR go-ipfs
-#RUN ./go-ipfs/install.sh
+RUN ./install.sh
 RUN ipfs init
 
 # add private key
