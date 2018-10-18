@@ -45,6 +45,7 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 # see https://stackoverflow.com/questions/47545940/npm-err-code-eintegrity-npm-5-3-0
 RUN npm config set package-lock false
 
+# run some checks
 RUN java -version
 RUN solc --version
 RUN lein --version
