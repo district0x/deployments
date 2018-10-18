@@ -1,8 +1,9 @@
 server {
-  listen 80;
-  server_name localhost;
+  listen 80 default_server;
+  server_name localhost ec2-35-160-97-136.us-west-2.compute.amazonaws.com www.ec2-35-160-97-136.us-west-2.compute.amazonaws.com;
 
-  set $peer_id QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj; # QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
+  set $peer_id QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj;
+             # QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
 
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {
     rewrite /(contracts|images|js|css|fonts|assets)(.*) /ipns/$peer_id/$1$2 break;

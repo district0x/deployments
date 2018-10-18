@@ -1,10 +1,6 @@
 FROM district0x/base:latest
 MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
-# copy update script
-#ADD update.sh /usr/bin/update.sh
-#RUN chmod a+x /usr/bin/update.sh
-
 # install nginx
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \
