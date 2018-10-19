@@ -58,14 +58,14 @@ docker build -t district0x/base builds/base
 #### <a name="memefactory-qa">
 
 If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory):
-Start by building the ipfs image, you need to pass the private key corresponding to the node peer id:
-
-```bash
-docker build -t qa_ipfs builds/ipfs --build-arg IPFS_PRV_KEY="$(cat ~/.ipfs/keystore/memefactory-qa)"
-```
-**Warning:** It is important to keep the image public, due to the stored secret!
 
 ```bash
 cd memefactory/qa
 docker-compose up
+```
+
+To update the ui to the master branch content:
+
+```bash
+docker exec -it qa_ipfs update-ui
 ```
