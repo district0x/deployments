@@ -11,12 +11,12 @@ services:
       # - "30303:30303"
       # - "30303:30303/udp"
     volumes:
-      - /tmp/parity-docker/testnet:/root/.local/share/io.parity.ethereum/
+      - /tmp/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
     networks:
       - memefactory-net
     command:
       --chain ropsten
-      --base-path /root/.local/share/io.parity.ethereum/
+      --base-path /home/parity/.local/share/io.parity.ethereum/
       --jsonrpc-apis 'web3,eth,net,parity,personal'
       --jsonrpc-interface all
       --jsonrpc-hosts all
