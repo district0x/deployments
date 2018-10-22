@@ -10,6 +10,7 @@ cd memefactory/
 # build ui
 lein deps
 lein garden once
+lein solc once
 lein cljsbuild once "ui"
 
 # publish new UI content
