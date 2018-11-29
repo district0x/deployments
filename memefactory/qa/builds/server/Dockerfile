@@ -11,6 +11,11 @@ RUN wget --no-check-certificate -O master.zip https://github.com/district0x/meme
     && unzip master.zip \
     && mv memefactory-master memefactory
 
+# add smart_contracts.cljs with ropsten addresses
+RUN wget --no-check-certificate -O /memefactory/src/memefactory/shared/smart_contracts.cljs https://raw.githubusercontent.com/district0x/pipelines/master/memefactory/qa/builds/shared/smart_contracts.cljs
+
+RUN cat /memefactory/src/memefactory/shared/smart_contracts.cljs
+
 WORKDIR memefactory
 
 RUN npm config set package-lock false
@@ -21,4 +26,4 @@ RUN lein solc once
 RUN lein cljsbuild once "server"
 
 EXPOSE 6300
-CMD ["node", "dev-server/memefactory.js"]
+CMD ["node", "server/memefactory.js"]

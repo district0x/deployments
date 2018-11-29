@@ -5,6 +5,9 @@ wget --no-check-certificate -O master.zip https://github.com/district0x/memefact
      && unzip master.zip \
      && mv memefactory-master memefactory
 
+# add smart_contracts.cljs with ropsten addresses
+RUN wget --no-check-certificate -O /memefactory/src/memefactory/shared/smart_contracts.cljs https://raw.githubusercontent.com/district0x/pipelines/master/memefactory/qa/builds/shared/smart_contracts.cljs
+
 cd memefactory/
 
 # build ui
