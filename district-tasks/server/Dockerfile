@@ -1,0 +1,14 @@
+FROM district0x/base
+RUN wget --no-check-certificate -O master.zip https://github.com/district0x/district0x-tasks/archive/master.zip \
+    && unzip master.zip \
+    && mv district0x-tasks /app
+WORKDIR /app
+COPY . .
+RUN lein deps
+RUN lein solc once
+RUN lein cljsbuild once "server"
+EXPOSE 6500
+CMD ["node", "server/district0x-tasks.js"]
+
+HEALTHCHECK --interval=5m --timeout=3s --retries=3 \
+    CMD curl --output /dev/null --silent --head --fail -k http://localhost:6500/graphql || exit 1
