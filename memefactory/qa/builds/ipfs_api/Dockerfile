@@ -17,7 +17,7 @@ RUN wget --no-check-certificate -O X0X.html https://raw.githubusercontent.com/di
 ADD default /etc/nginx/sites-available/default
 
 # setup server config
-ADD memefactory.io /etc/nginx/sites-available/ipfs.api
+ADD ipfs.api /etc/nginx/sites-available/ipfs.api
 RUN ln -s -f /etc/nginx/sites-available/ipfs.api /etc/nginx/sites-enabled/ipfs.api
 
 EXPOSE 5001
