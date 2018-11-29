@@ -17,7 +17,7 @@ RUN wget --no-check-certificate -O X0X.html https://raw.githubusercontent.com/di
 ADD default /etc/nginx/sites-available/default
 
 # setup server config
-ADD memefactory.io /etc/nginx/sites-available/memefactory
+ADD memefactory /etc/nginx/sites-available/memefactory
 RUN ln -s -f /etc/nginx/sites-available/memefactory /etc/nginx/sites-enabled/memefactory
 
 EXPOSE 80
