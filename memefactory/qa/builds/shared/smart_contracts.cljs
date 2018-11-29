@@ -1,57 +1,79 @@
-(ns memefactory.shared.smart-contracts) 
+(ns memefactory.shared.smart-contracts)
 
-(def smart-contracts 
-{:district-config
- {:name "DistrictConfig",
-  :address "0x77814cadfb5c3b7d873f0b37e01ad4a71f3851c5"},
- :ds-guard
- {:name "DSGuard",
-  :address "0xaec782e06af027710fbdb329163afd9d708e3d84"},
- :param-change-registry
- {:name "ParamChangeRegistry",
-  :address "0xb639254e441036aef1eaaa35c200d246ae32354f"},
- :param-change-registry-db
- {:name "EternalDb",
-  :address "0xc318eb1f620582606886ff9f8fdcfe16fd5a0868"},
- :meme-registry-db
- {:name "EternalDb",
-  :address "0xecbedda1b343f93dc83c1394f8dd89e3fa07cfd5"},
- :param-change
- {:name "ParamChange",
-  :address "0x0eb025fda6348d02ed0141dbc8e4a2f3453d751b"},
- :minime-token-factory
- {:name "MiniMeTokenFactory",
-  :address "0x4b33f1fa2b20be587ceae4a54d5de0736bcef9d5"},
- :meme-auction-factory
- {:name "MemeAuctionFactory",
-  :address "0x8cb025a31c00786447aac8fe3c06a0443de4a6ac"},
- :meme-auction
- {:name "MemeAuction",
-  :address "0x95a987e436aac5dc67d2f4dfc1b5d63bb8b9162f"},
- :param-change-factory
- {:name "ParamChangeFactory",
-  :address "0x4c9a81fc475203bc903ff1c119f658b7558fd2c6"},
- :param-change-registry-fwd
- {:name "MutableForwarder",
-  :address "0x5b95a79855ec38585ea455f111c7649b331eac63"},
- :meme-factory
- {:name "MemeFactory",
-  :address "0xe3c9660eccc58e2c69382cb6bf97ba9675663ece"},
- :meme-token
- {:name "MemeToken",
-  :address "0x54a7991d27e313f6a55b206b5257ea545c786776"},
- :DANK
- {:name "DankToken",
-  :address "0x5f541c6d08dd8f3f628bcaae587a0635ba5804a8"},
- :meme-registry
- {:name "Registry",
-  :address "0x0b855b955209667939c89dfea6d4d14551f46c0e"},
- :meme
- {:name "Meme",
-  :address "0xc0d445cbdae48ed1165614a99a1d084f403513fb"},
- :meme-registry-fwd
- {:name "MutableForwarder",
-  :address "0xf239886c771c90f24f6cc7b851794aa613f3ba3f"},
- :meme-auction-factory-fwd
- {:name "MutableForwarder",
-  :address "0xe77b82c6407cd6fce49540cacd3efc1bb890ce60"}})
+(def smart-contracts
+  {:district-config
+   {:name "DistrictConfig",
+    :address
+    "0x6d17e855bcf02f6375170826e75de339eb5d1710"},
+   :ds-guard
+   {:name "DSGuard",
+    :address
+    "0x310e3bd824d1ff9f8d5f3fccea424e5887f857e0"},
+   :param-change-registry
+   {:name "ParamChangeRegistry",
+    :address
+    "0x352ff83aa7ce35897dd0e26d46e2eaaff47aac41"},
+   :param-change-registry-db
+   {:name "EternalDb",
+    :address
+    "0xa8ddce84ddbf4306e9feedca35b2dde6e7793796"},
+   :meme-registry-db
+   {:name "EternalDb",
+    :address
+    "0x06ff0e4651e72341377cfbbc469e7f41502b29ab"},
+   :param-change
+   {:name "ParamChange",
+    :address
+    "0x6bcc7b4468223ecafc8f61bd8a0cfee6b56aa190"},
+   :minime-token-factory
+   {:name "MiniMeTokenFactory",
+    :address
+    "0x74bf1a929108427ae218fdda45b1eaabaeebe377"},
+   :meme-auction-factory
+   {:name "MemeAuctionFactory",
+    :address
+    "0x28aefc7cb05f54e7e53db08ffe1a95ac3af275ae"},
+   :meme-auction
+   {:name "MemeAuction",
+    :address
+    "0xa2e3761ecd114ff3284a7053816f8b68de0ba64f"},
+   :param-change-factory
+   {:name "ParamChangeFactory",
+    :address
+    "0xf0f726a39cecae438d4aa29be8dcbbc1501e68f5"},
+   :param-change-registry-fwd
+   {:name "MutableForwarder",
+    :address
+    "0xafdacb6c0e36fe9a77cc51ff938d824dfccbfb09"},
+   :meme-factory
+   {:name "MemeFactory",
+    :address
+    "0xb861eb6ab861dc84a59215957857617ceb934bfc"},
+   :meme-token
+   {:name "MemeToken",
+    :address
+    "0xad42dca97dfd67ec64e2d411aa7aab647ec25610"},
+   :DANK
+   {:name "DankToken",
+    :address
+    "0x9274b3c3cdd5818d842a9e27a440ce04b2e1fc50"},
+   :meme-registry
+   {:name "Registry",
+    :address
+    "0xe7a5c1d0a0a164ee74232393131d8fc8ac9e1d36"},
+   :meme
+   {:name "Meme",
+    :address
+    "0x19a9c695b22265532e36b10596702f1627807bae"},
+   :meme-registry-fwd
+   {:name "MutableForwarder",
+    :address
+    "0x33a3035f15e61ebbf230b54e7fea2e4b908fe330"},
+   :district0x-emails
+   {:name "District0xEmails",
+    :address
+    "0x4d293db4ac1db2ae2c18854756ff0047fc05b1af"},
+   :meme-auction-factory-fwd
+   {:name "MutableForwarder",
+    :address
+    "0x7712f2814de26eb719c2818c3f8c9cf0254d95d1"}})
