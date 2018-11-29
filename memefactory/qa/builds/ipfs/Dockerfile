@@ -29,10 +29,10 @@ RUN chmod a+x /usr/bin/update-ui
 #EXPOSE 4002/udp
 
 # api 
-EXPOSE 5001
+#EXPOSE 5001
 
 # gateway
-EXPOSE 8080
+#EXPOSE 8080
 
 # websocket
 #EXPOSE 8081

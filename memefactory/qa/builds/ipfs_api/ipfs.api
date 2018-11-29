@@ -1,9 +1,8 @@
 server {
   listen 5001 default_server;
-  server_name localhost ec2-35-160-97-136.us-west-2.compute.amazonaws.com www.ec2-35-160-97-136.us-west-2.compute.amazonaws.com qa.district0x.io;
+  server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com ipfs.api.qa.district0x.io;
 
   location / {
-    rewrite /(.*) /ipns/$peer_id/ break;
     try_files $uri @ipfs;
   }
 
