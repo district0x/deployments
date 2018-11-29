@@ -12,12 +12,6 @@ RUN tar xvfz go-ipfs_v0.4.17_linux-amd64.tar.gz
 WORKDIR go-ipfs
 RUN bash install.sh
 
-# RUN ipfs init
-# RUN ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
-# RUN ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
-# RUN ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
-# RUN ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'
-
 WORKDIR /
 
 # add start_ipfs script
@@ -28,12 +22,20 @@ RUN chmod a+x /usr/local/bin/start_ipfs
 ADD update-ui.sh /usr/bin/update-ui
 RUN chmod a+x /usr/bin/update-ui
 
-# Ports for Swarm TCP, Swarm uTP, API, Gateway, Swarm Websockets
-EXPOSE 4001
-EXPOSE 4002/udp
+# swarm tcp
+#EXPOSE 4001
+
+# swarm uTP
+#EXPOSE 4002/udp
+
+# api 
 EXPOSE 5001
+
+# gateway
 EXPOSE 8080
-EXPOSE 8081
+
+# websocket
+#EXPOSE 8081
 
 # Expose the fs-repo as a volume.
 # start_ipfs initializes an fs-repo if none is mounted.
