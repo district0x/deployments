@@ -23,7 +23,7 @@ server {
   location @ipfs {
     proxy_intercept_errors on;
 #    proxy_pass http://ipfs.io;
-   proxy_pass http://qa_ipfs:8080;
+   proxy_pass http://qa_ipfs-daemon:8080;
 
     # DEBUG header
 #   add_header X-Ipfs-Url $ipfs_url;

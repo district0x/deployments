@@ -1,0 +1,114 @@
+version: "3"
+services:
+
+  parity:
+    image: parity/parity:stable
+    container_name: qa_parity
+    command:
+      --chain ropsten
+      --base-path /home/parity/.local/share/io.parity.ethereum/
+      --jsonrpc-apis 'web3,eth,net,parity,personal'
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-cors '*'
+      --cache-size 1024
+      --db-compaction ssd
+      --mode active
+      --jsonrpc-port 8545
+    ports:
+      # - 8545:8545
+      # - "8180:8180"
+      # - "8546:8546"
+      # - "30303:30303"
+      # - "30303:30303/udp"
+    volumes:
+      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
+    networks:
+      - parity-net
+
+  ropsten:
+    build: ropsten
+    container_name: qa_ropsten
+    depends_on:
+      - parity
+    ports:
+      - 8545:8545
+    networks:
+      - parity-net
+ 
+  ipfs-daemon:
+    build: ipfs/ipfs-daemon
+    container_name: qa_ipfs-daemon
+    ports:
+     # - 8080:8080
+     # - 4001:4001
+     # - 127.0.0.1:5001:5001
+    volumes:
+      - /home/$USER/ipfs-docker:/data/ipfs
+     # - /home/$USER/ipfs-docker/keystore/:/data/ipfs/keystore/
+    networks:
+      - ipfs-net
+
+  ipfs-api:
+    build: ipfs/ipfs-api
+    container_name: qa_ipfs-api
+    depends_on:
+      - ipfs-daemon
+    ports:
+      - 5001:5001
+    networks:
+      - ipfs-net
+
+  ipfs-gateway:
+    build: ipfs/ipfs-gateway
+    container_name: qa_ipfs-gateway
+    depends_on:
+      - ipfs-daemon
+    ports:
+      - 8080:8080
+    networks:
+      - ipfs-net
+
+  memefactory-server:
+    build: memefactory/server
+    container_name: qa_memefactory-server
+    depends_on:
+      - ipfs
+      - parity
+    ports:
+    #  - 6300:6300
+    networks:
+      - memefactory-net
+      - ipfs-net
+      - parity-net
+
+  memefactory-graphql:
+    build: memefactory/graphql
+    container_name: qa_memefactory-grapqhl
+    depends_on:
+      - memefactory-server
+    ports:
+      - 6300:6300
+    networks:
+      - memefactory-net
+
+  memefactory-ui:
+    build: memefactory/ui
+    container_name: qa_memefactory-ui
+    depends_on:
+     - memefactory-server
+     - memefactory-graphql
+     - ipfs-api
+     - ipfs-gateway
+    ports:
+      - 80:80
+    networks:
+      - ipfs-net
+
+networks:
+  memefactory-net:
+    driver: "bridge"
+  parity-net:
+    driver: "bridge"
+  ipfs-net:
+    driver: "bridge"
