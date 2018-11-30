@@ -15,7 +15,7 @@ services:
       --db-compaction ssd
       --mode active
       --jsonrpc-port 8545
-    ports:
+    # ports:
       # - 8545:8545
       # - "8180:8180"
       # - "8546:8546"
@@ -39,7 +39,7 @@ services:
   ipfs-daemon:
     build: ipfs/ipfs-daemon
     container_name: qa_ipfs-daemon
-    ports:
+    # ports:
      # - 8080:8080
      # - 4001:4001
      # - 127.0.0.1:5001:5001
@@ -73,9 +73,9 @@ services:
     build: memefactory/server
     container_name: qa_memefactory-server
     depends_on:
-      - ipfs
+      - ipfs-daemon
       - parity
-    ports:
+    # ports:
     #  - 6300:6300
     networks:
       - memefactory-net
