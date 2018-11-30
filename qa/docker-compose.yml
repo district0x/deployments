@@ -14,6 +14,7 @@ services:
       --cache-size 6000
       --db-compaction ssd
       --mode active
+      --pruning fast
       --jsonrpc-port 8545
     volumes:
       - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/

@@ -59,36 +59,34 @@ sudo chmod a+x /usr/local/bin/docker-compose
     - [ui](#memefactory-ui)
 - [base](#base)
 
-### <a name="basic"> Basic usage
+### <a name="qa"> QA enviroment </a>
 
-<!-- ### <a name="basic"> Basic usage -->
+Start the services in the QA environment:
 
-<!-- Start the services in the QA environment: -->
+``` bash
+cd qa/
+docker-compose -f docker-compose.yml \
+               -f memefactory/docker-compose.yml up -d
+```
 
-<!-- ``` bash -->
-<!-- cd qa -->
-<!-- docker-compose -f docker-compose.yml \ -->
-<!--                -f memefactory/docker-compose.yml up -d -->
-<!-- ``` -->
-<!-- ### <a name="base"> Base docker image -->
+#### <a name="parity"> parity services </a>
+##### <a name="ropsten"> ropsten service </a>
 
-<!-- This image comes with all the common dependencies and serves as the base for all other builds: -->
-
-<!-- ```bash -->
-<!-- docker build -t district0x/base base/ -->
-<!-- ``` -->
-
-<!-- ### <a name="memefactory-qa"> -->
-
-<!-- If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory): -->
-
-<!-- ```bash -->
-<!-- cd memefactory/qa -->
-<!-- docker-compose up -->
-<!-- ``` -->
-
-<!-- To update the ui to the master branch content: -->
+#### <a name="ipfs"> ipfs services </a>
+##### <a name="ipfs-daemon"> ipfs daemon service </a>
 
 <!-- ```bash -->
 <!-- docker exec -it qa_ipfs update-ui -->
 <!-- ``` -->
+
+##### <a name="ipfs-api"> ipfs api service </a>
+##### <a name="ipfs-gateway"> ipfs gateway service </a>
+
+#### <a name="memefactory"> memefactory services </a>
+
+##### <a name="memfactory-server"> memefactory server service </a>
+##### <a name="memefactory api"> memfactory api service </a>
+##### <a name="memfactory ui"> memefactory ui service </a>
+
+### <a name="base"> base image </a>
+
