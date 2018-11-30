@@ -25,5 +25,5 @@ RUN lein deps
 RUN lein solc once
 RUN lein cljsbuild once "server"
 
-EXPOSE 6300
+# EXPOSE 6300
 CMD ["node", "server/memefactory.js"]

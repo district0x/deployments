@@ -9,7 +9,7 @@ ENV LEIN_ROOT=1
 # install system-wide deps
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \
-    -q wget curl ca-certificates software-properties-common unzip debconf rlwrap python build-essential git nano fish mlocate
+    -q wget curl ca-certificates software-properties-common unzip debconf rlwrap python build-essential git nano fish mlocate iputils-ping
 
 # install Java
 RUN add-apt-repository -y ppa:webupd8team/java
