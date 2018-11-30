@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  memefactory-server:
+    build: memefactory/server
+    container_name: qa_memefactory-server
+    depends_on:
+      - ipfs-daemon
+      - parity
+    networks:
+      - memefactory-net
+      - ipfs-net
+      - parity-net
+
+  memefactory-api:
+    build: memefactory/api
+    container_name: qa_memefactory-api
+    depends_on:
+      - memefactory-server
+    ports:
+      - 6300:6300
+    networks:
+      - memefactory-net
+
+  memefactory-ui:
+    build: memefactory/ui
+    container_name: qa_memefactory-ui
+    depends_on:
+     - memefactory-server
+     - memefactory-api
+     - ipfs-api
+     - ipfs-gateway
+    ports:
+      - 80:80
+    networks:
+      - ipfs-net
+
+networks:
+  memefactory-net:
+    driver: "bridge"

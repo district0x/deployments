@@ -1,8 +1,8 @@
-# district-pipelines
+# district-deployments
 
-This project contains docker and docker compose files for deploying qa and production environments of different districts.
+This project contains docker images and docker-compose scripts for deploying districts to different environments.
 
-## Installation
+## Requirements
 
 You need [Docker](https://www.docker.com/) installed.
 
@@ -46,26 +46,49 @@ sudo chmod a+x /usr/local/bin/docker-compose
 
 ## Usage
 
-#### <a name="base"> Base docker image
+- [QA enviroment](#qa)
+  - [parity](#parity)
+    - [ropsten](#parity-ropsten)
+  - [ipfs](#ipfs)
+    - [daemon](#ipfs-daemon)
+    - [api](#ipfs-api)
+    - [gateway](#)
+  - [memefactory](#memfactory)
+    - [server](#memfactory-server)
+    - [api](#memefactory-api)
+    - [ui](#memefactory-ui)
+- [base](#base)
 
-This image comes with all the common dependencies and serves as the base for all other builds:
+### <a name="basic"> Basic usage
 
-```bash
-cd memefactory/qa
-docker build -t district0x/base builds/base
-```
+<!-- ### <a name="basic"> Basic usage -->
 
-#### <a name="memefactory-qa">
+<!-- Start the services in the QA environment: -->
 
-If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory):
+<!-- ``` bash -->
+<!-- cd qa -->
+<!-- docker-compose -f docker-compose.yml \ -->
+<!--                -f memefactory/docker-compose.yml up -d -->
+<!-- ``` -->
+<!-- ### <a name="base"> Base docker image -->
 
-```bash
-cd memefactory/qa
-docker-compose up
-```
+<!-- This image comes with all the common dependencies and serves as the base for all other builds: -->
 
-To update the ui to the master branch content:
+<!-- ```bash -->
+<!-- docker build -t district0x/base base/ -->
+<!-- ``` -->
 
-```bash
-docker exec -it qa_ipfs update-ui
-```
+<!-- ### <a name="memefactory-qa"> -->
+
+<!-- If you want to create a QA environment for [MemeFactory](https://github.com/district0x/memefactory): -->
+
+<!-- ```bash -->
+<!-- cd memefactory/qa -->
+<!-- docker-compose up -->
+<!-- ``` -->
+
+<!-- To update the ui to the master branch content: -->
+
+<!-- ```bash -->
+<!-- docker exec -it qa_ipfs update-ui -->
+<!-- ``` -->
