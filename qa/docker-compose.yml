@@ -82,9 +82,9 @@ services:
       - ipfs-net
       - parity-net
 
-  memefactory-graphql:
-    build: memefactory/graphql
-    container_name: qa_memefactory-grapqhl
+  memefactory-api:
+    build: memefactory/api
+    container_name: qa_memefactory-api
     depends_on:
       - memefactory-server
     ports:
@@ -97,7 +97,7 @@ services:
     container_name: qa_memefactory-ui
     depends_on:
      - memefactory-server
-     - memefactory-graphql
+     - memefactory-api
      - ipfs-api
      - ipfs-gateway
     ports:
