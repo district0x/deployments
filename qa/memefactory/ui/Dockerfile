@@ -9,6 +9,9 @@ RUN apt-get update -y \
 # replace nginx config
 ADD nginx.conf /etc/nginx/nginx.conf
 
+# add digest auth file
+ADD memefactory.passwd /etc/nginx/memefactory.passwd
+
 # setup error page
 RUN wget --no-check-certificate -O X0X.html https://raw.githubusercontent.com/district0x/X0X/master/X0X.html \
   && mv X0X.html /usr/share/nginx/html/X0X.html

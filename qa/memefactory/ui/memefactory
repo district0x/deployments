@@ -1,16 +1,21 @@
 server {
   listen 80 default_server;
-  server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com memefactory.qa.district0x.io;
+#  server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com memefactory.qa.district0x.io;
 
   set $peer_id QmaGffUknWjnKKar9WjSNZHroxXwtZTUB3ARBh8jUZNaos;
              # QmRawkiqLRLG1yzcSK3dcZ3uaAwM2nSLuMjiiNRK3i9HEj;
 
+  auth_basic "Restricted Content";
+  auth_basic_user_file /etc/nginx/memefactory.passwd;
+
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {
+    auth_basic off;
     rewrite /(contracts|images|js|css|fonts|assets)(.*) /ipns/$peer_id/$1$2 break;
     try_files $uri @ipfs;
   }
 
   location / {
+  #  auth_basic off;
     rewrite /(.*) /ipns/$peer_id/ break;
     try_files $uri @ipfs;
   }
