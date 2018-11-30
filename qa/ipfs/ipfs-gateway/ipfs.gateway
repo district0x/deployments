@@ -13,7 +13,7 @@ server {
 
   location @ipfs {
     proxy_intercept_errors on;
-    proxy_pass http://qa_ipfs:8080;
+    proxy_pass http://qa_ipfs-daemon:8080;
   }
 
    # redirect server error pages to the static error page
