@@ -11,6 +11,7 @@ EXPOSE 80
 RUN apt-get --allow-releaseinfo-change update
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y -q nginx
+RUN wget --no-check-certificate -O /usr/share/nginx/html/X0X.html https://raw.githubusercontent.com/district0x/X0X/master/X0X.html
 CMD ["nginx", "-g", "daemon off"]
 
 HEALTHCHECK --interval=5m --timeout=3s --retries=3 \

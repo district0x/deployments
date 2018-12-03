@@ -1,5 +1,5 @@
 server {
-  listen 80 default_server;
+  listen 81 default_server;
   server_name localhost ec2-35-160-97-136.us-west-2.compute.amazonaws.com www.ec2-35-160-97-136.us-west-2.compute.amazonaws.com;
 
   location ~ /(contracts|images|js|css|fonts|assets)(.*)$ {

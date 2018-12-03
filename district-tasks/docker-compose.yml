@@ -4,7 +4,7 @@ services:
     bulid: server
     container_name: qa_district-tasks-server
     ports:
-    - 6500:6500
+    - 6501:6500
     volumes:
     - server/config.edn:/app/config.edn
     environment:
@@ -19,11 +19,10 @@ services:
     depends_on:
     - server
     ports:
-    - 80:80
+    - 81:80
     volumes:
     - ui/nginx.conf:/etc/nginx/nginx.conf
     - ui/district0x-tasks.io:/etc/nginx/sites-enabled/district0x-tasks.io
-    - ui/X0X.html:/usr/share/nginx/html/X0X.html
     networks:
     - tasks-net
     - qa-net
