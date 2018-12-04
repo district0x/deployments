@@ -16,6 +16,7 @@ services:
       --mode active
       --pruning fast
       --jsonrpc-port 8545
+      --tracing on
     volumes:
       - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
     networks:
