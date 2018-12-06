@@ -6,6 +6,7 @@ WORKDIR /app
 COPY . .
 RUN lein deps
 RUN lein solc once
+RUN lein garden once
 RUN lein cljsbuild once "ui"
 EXPOSE 80
 RUN apt-get --allow-releaseinfo-change update
