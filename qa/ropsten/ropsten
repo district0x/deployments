@@ -1,6 +1,6 @@
 server {
-  listen 8545 default_server;
-  server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com ropsten.qa.district0x.io;
+  listen 80; # default_server;
+  server_name ropsten.qa.district0x.io;
 
   location / {
     try_files $uri @parity;
@@ -13,7 +13,7 @@ server {
 
   location @parity {
     proxy_intercept_errors on;
-    proxy_pass http://qa_parity:8545;
+    proxy_pass http://localhost:8545;
   }
 
    # redirect server error pages to the static error page

@@ -20,5 +20,5 @@ ADD default /etc/nginx/sites-available/default
 ADD ropsten /etc/nginx/sites-available/ropsten
 RUN ln -s -f /etc/nginx/sites-available/ropsten /etc/nginx/sites-enabled/ropsten
 
-EXPOSE 8545
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -2,7 +2,7 @@
            :console? true
            :sentry {:dsn "https://4bb89c9cdae14444819ff0ac3bcba253@sentry.io/1306960"
                     :min-level :warn}}
- :web3 {:url "http://qa_parity:8545"}
+ :web3 {:url "http://localhost:8545"}
  :ipfs {:host "qa_ipfs-daemon:5001"
         :endpoint "/api/v0"
         :gateway "http://qa.district0x.io:8080/ipfs" ;; gateway is exposed by a container

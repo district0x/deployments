@@ -75,6 +75,8 @@ docker-compose -f docker-compose.yml \
 #### <a name="ipfs"> ipfs services </a>
 ##### <a name="ipfs-daemon"> ipfs daemon service </a>
 
+<!-- needs private key -->
+
 <!-- ```bash -->
 <!-- docker exec -it qa_ipfs update-ui -->
 <!-- ``` -->
@@ -83,7 +85,6 @@ docker-compose -f docker-compose.yml \
 ##### <a name="ipfs-gateway"> ipfs gateway service </a>
 
 #### <a name="memefactory"> memefactory services </a>
-
 ##### <a name="memfactory-server"> memefactory server service </a>
 ##### <a name="memefactory api"> memfactory api service </a>
 ##### <a name="memfactory ui"> memefactory ui service </a>
