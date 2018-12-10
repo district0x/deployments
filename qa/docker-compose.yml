@@ -20,7 +20,8 @@ services:
       --snapshot-peers 15
       --jsonrpc-port 8545
     volumes:
-      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
+#      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
+      - /home/$USER/.local/share/io.parity.ethereum/:/home/parity/.local/share/io.parity.ethereum/
     networks:
       - parity-net
 
