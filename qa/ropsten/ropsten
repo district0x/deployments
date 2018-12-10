@@ -13,7 +13,7 @@ server {
 
   location @parity {
     proxy_intercept_errors on;
-    proxy_pass http://localhost:8545;
+    proxy_pass http://qa_parity:8545;
   }
 
    # redirect server error pages to the static error page
