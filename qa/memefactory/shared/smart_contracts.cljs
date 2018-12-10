@@ -76,4 +76,7 @@
    :meme-auction-factory-fwd
    {:name "MutableForwarder",
     :address
-    "0x7712f2814de26eb719c2818c3f8c9cf0254d95d1"}})
+    "0x7712f2814de26eb719c2818c3f8c9cf0254d95d1"}
+   :dank-faucet
+   {:name "DankFaucet"
+    :address "0x56f0768DA6A7BE002A06B59Aea24f702C1055d9B"}})
