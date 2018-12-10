@@ -1,6 +1,6 @@
 server {
-  listen 80; # default_server;
-  server_name ropsten.qa.district0x.io;
+  listen 8545 default_server;
+  server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com ropsten.qa.district0x.io;
 
   location / {
     try_files $uri @parity;
