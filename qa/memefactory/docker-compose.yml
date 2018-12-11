@@ -6,11 +6,11 @@ services:
     container_name: qa_memefactory-server
     depends_on:
       - ipfs-daemon
-      - parity     
+#      - parity     
     networks:
       - memefactory-net
       - ipfs-net
-      - parity-net
+#      - parity-net
 
   memefactory-api:
     build: memefactory/api
