@@ -22,6 +22,7 @@ services:
     volumes:
 #      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
       - /home/$USER/.local/share/io.parity.ethereum/:/home/parity/.local/share/io.parity.ethereum/
+    privileged: true
     networks:
       - parity-net
 
@@ -34,7 +35,7 @@ services:
       - 8545:8545
     networks:
       - parity-net
- 
+
   ipfs-daemon:
     build: ipfs/daemon
     container_name: qa_ipfs-daemon
