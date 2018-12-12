@@ -1,6 +1,13 @@
 FROM district0x/base:latest
 MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
+# Python dependencies
+RUN apt-get -y --allow-releaseinfo-change update
+RUN apt-get -y install libffi-dev libssl-dev
+RUN apt-get -y install python-pip
+RUN pip install cryptography --force-reinstall
+RUN pip install base58
+
 # ENV variables
 ENV CONFIG /config/meme.config.qa.edn
 
