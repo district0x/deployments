@@ -24,7 +24,6 @@ services:
 #       - /home/$USER/.local/share/io.parity.ethereum/:/home/parity/.local/share/io.parity.ethereum/
 #     networks:
 #       - parity-net
-
 #   ropsten:
 #     build: ropsten
 #     container_name: qa_ropsten
