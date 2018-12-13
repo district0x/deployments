@@ -1,41 +1,39 @@
 version: "3"
 services:
 
-  parity:
-    image: parity/parity:v2.0.6
-    container_name: qa_parity
-    command:
-      --chain ropsten
-      --base-path /home/parity/.local/share/io.parity.ethereum/
-      --jsonrpc-apis 'web3,eth,net,parity,personal'
-      --jsonrpc-interface all
-      --jsonrpc-hosts all
-      --jsonrpc-cors '*'
-      --cache-size 6000
-      --db-compaction ssd
-      --mode active
-      --pruning fast
-      --logging info
-      --warp
-      --snapshot-peers 15
-      --jsonrpc-port 8545
-    volumes:
-#      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
-      - /home/$USER/.local/share/io.parity.ethereum/:/home/parity/.local/share/io.parity.ethereum/
-    privileged: true
-    networks:
-      - parity-net
-
-  ropsten:
-    build: ropsten
-    container_name: qa_ropsten
-    depends_on:
-      - parity
-    ports:
-      - 8545:8545
-    networks:
-      - parity-net
-
+#   parity:
+#     image: parity/parity:v2.0.6
+#     container_name: qa_parity
+#     command:
+#       --chain ropsten
+#       --base-path /home/parity/.local/share/io.parity.ethereum/
+#       --jsonrpc-apis 'web3,eth,net,parity,personal'
+#       --jsonrpc-interface all
+#       --jsonrpc-hosts all
+#       --jsonrpc-cors '*'
+#       --cache-size 6000
+#       --db-compaction ssd
+#       --mode active
+#       --pruning fast
+#       --logging info
+#       --warp
+#       --snapshot-peers 15
+#       --jsonrpc-port 8545
+#     volumes:
+# #      - /home/$USER/parity-docker/testnet:/home/parity/.local/share/io.parity.ethereum/
+#       - /home/$USER/.local/share/io.parity.ethereum/:/home/parity/.local/share/io.parity.ethereum/
+#     networks:
+#       - parity-net
+#   ropsten:
+#     build: ropsten
+#     container_name: qa_ropsten
+#     depends_on:
+#       - parity
+#     ports:
+#       - 8545:8545
+#     networks:
+#       - parity-net
+ 
   ipfs-daemon:
     build: ipfs/daemon
     container_name: qa_ipfs-daemon
@@ -68,5 +66,5 @@ services:
 networks:
   ipfs-net:
     driver: "bridge"
-  parity-net:
-    driver: "bridge"
+  # parity-net:
+  #   driver: "bridge"
