@@ -63,7 +63,7 @@ sudo chmod a+x /usr/local/bin/docker-compose
 
 ## <a name="qa"> QA enviroment </a>
 
-Start the services in the QA environment:
+Start the services (but parity) in the QA environment:
 
 ``` bash
 cd qa/
@@ -73,14 +73,23 @@ docker-compose -f docker-compose.yml \
 
 ## <a> parity services </a>
 
+Parity service is currently a systemd service instead of docker service because of weird behavior when running inside a docker container.
+
 ### <a name="parity"> parity </a>
 
-This container provides parity configured as a ropsten node.
-No ports are exposed to the host, and the containers that wish to have access to parity ports should join the `parity-net` network.
+For starting, stopping, status checking of parity service you can use
 
-### <a name="ropsten"> ropsten </a>
+```bash
+sudo systemctl status parity
+sudo systemctl stop parity
+sudo systemctl start parity
+```
 
-This container exposes parity's JSON rpc on port 8545 to the host.
+It will run `/home/ubuntu/run_parity.sh`
+
+Service configuration file is `/etc/systemd/system/parity.service`
+
+It will expose parity's JSON rpc on port 8545.
 
 ## <a name="ipfs"> ipfs services </a>
 
