@@ -15,7 +15,7 @@ cd memefactory/
 lein deps
 lein garden once
 lein solc once
-lein cljsbuild once "ui"
+MEMEFACTORY_ENV=qa lein cljsbuild once "ui"
 
 # publish new UI content
 HASH=$(ipfs add -r resources/public/ |  tail -1 | grep -o -P '(?<=added).*(?=public)')
