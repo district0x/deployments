@@ -1,5 +1,6 @@
 {:logging {:level :debug
            :console? true
+           :file-path "memefactory.qa.log"
            :sentry {:dsn "https://4bb89c9cdae14444819ff0ac3bcba253@sentry.io/1306960?sentry_environment=qa"
                     :min-level :warn}}
  :web3 {:url "http://qa.district0x.io:8545"}
