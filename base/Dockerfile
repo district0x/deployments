@@ -4,7 +4,8 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 # ENV variables
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 8.4.0
-ENV LEIN_ROOT=1
+ENV SOLC_VERSION 0.4.24
+# ENV LEIN_ROOT=1
 
 # install system-wide deps
 RUN apt-get update -y \
@@ -19,9 +20,9 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-sel
 RUN apt-get -y install oracle-java8-installer oracle-java8-set-default
 
 # install solc
-RUN add-apt-repository --yes ppa:ethereum/ethereum
-RUN apt-get update
-RUN apt-get install --yes git solc
+RUN wget --no-check-certificate -P /bin https://github.com/ethereum/solidity/releases/download/v$SOLC_VERSION/solc-static-linux
+RUN chmod a+x /bin/solc-static-linux
+RUN ln -s /bin/solc-static-linux /usr/bin/solc
 
 # install lein
 RUN curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > /bin/lein
