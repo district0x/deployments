@@ -3,12 +3,12 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
 # ENV variables
 ENV IPFS_LOGGING ""
-ENV IPFS_VERSION v0.4.17
+ENV IPFS_VERSION 0.4.17
 ENV IPFS_PATH /data/ipfs
 
 # install ipfs
-RUN wget --no-check-certificate https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz
-RUN tar xvfz go-ipfs_v0.4.17_linux-amd64.tar.gz
+RUN wget --no-check-certificate https://dist.ipfs.io/go-ipfs/v$IPFS_VERSION/go-ipfs_v$IPFS_VERSION_linux-amd64.tar.gz
+RUN tar xvfz go-ipfs_v$IPFS_VERSION_linux-amd64.tar.gz
 WORKDIR go-ipfs
 RUN bash install.sh
 

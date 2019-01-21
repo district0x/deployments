@@ -1,14 +1,13 @@
 {:logging {:level :debug
            :console? true
-           :file-path "memefactory.qa.log"
+           :file-path "/logs/memefactory.qa.log"
            :sentry {:dsn "https://4bb89c9cdae14444819ff0ac3bcba253@sentry.io/1306960?sentry_environment=qa"
                     :min-level :warn}}
  :web3 {:url "http://qa.district0x.io:8545"}
- :ipfs {:host "qa_ipfs-daemon:5001"
+ :ipfs {:host "http://qa_ipfs-daemon:5001" ;; host is the container address
         :endpoint "/api/v0"
         :gateway "http://qa.district0x.io:8080/ipfs" ;; gateway is exposed by a container
         }
- :smart-contracts {:auto-mining? false} ;; false for sync API
  :emailer {:private-key "dummy"
            :print-mode? true}
  }

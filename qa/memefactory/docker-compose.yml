@@ -11,6 +11,8 @@ services:
       - memefactory-net
       - ipfs-net
 #      - parity-net
+    volumes:
+      - /home/$USER/logs:/logs
 
   memefactory-api:
     build: memefactory/api

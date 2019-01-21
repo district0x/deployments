@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
 # ENV variables
