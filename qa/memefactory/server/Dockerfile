@@ -9,9 +9,7 @@ RUN pip install cryptography --force-reinstall
 RUN pip install base58
 
 # ENV variables
-ENV CONFIG /config/meme.config.qa.edn
-
-ADD meme.config.qa.edn /config/meme.config.qa.edn
+ENV CONFIG /configs/meme.config.qa.edn # config is stored on host
 
 # get server source code
 RUN wget --no-check-certificate -O master.zip https://github.com/district0x/memefactory/archive/master.zip \
@@ -32,6 +30,10 @@ RUN npm config set package-lock false
 RUN lein deps
 RUN lein solc once
 RUN lein cljsbuild once "server"
+
+# expose to host
+# VOLUME /configs
+# VOLUME /logs
 
 # EXPOSE 6300
 CMD ["node", "server/memefactory.js"]

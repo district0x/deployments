@@ -13,6 +13,7 @@ services:
 #      - parity-net
     volumes:
       - /home/$USER/logs:/logs
+      - /home/$USER/configs:/configs
 
   memefactory-api:
     build: memefactory/api
