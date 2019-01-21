@@ -9,7 +9,7 @@ RUN pip install cryptography --force-reinstall
 RUN pip install base58
 
 # ENV variables
-ENV CONFIG /configs/meme.config.qa.edn # config is stored on host
+ENV CONFIG /configs/meme.config.qa.edn
 
 # get server source code
 RUN wget --no-check-certificate -O master.zip https://github.com/district0x/memefactory/archive/master.zip \
