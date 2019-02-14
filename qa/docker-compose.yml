@@ -33,7 +33,7 @@ services:
 #       - 8545:8545
 #     networks:
 #       - parity-net
- 
+
   ipfs-daemon:
     build: ipfs/daemon
     container_name: qa_ipfs-daemon

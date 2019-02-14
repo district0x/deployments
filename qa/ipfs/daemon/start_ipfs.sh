@@ -27,4 +27,4 @@ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", 
 # For the love of Krishna, do not use `--debug`!
 # You can modify them later, けど. See
 # https://ipfs.io/docs/commands/#ipfs-log-level
-exec env IPFS_LOGGING=info ipfs daemon --enable-gc
+exec env IPFS_LOGGING=warning ipfs daemon --enable-gc

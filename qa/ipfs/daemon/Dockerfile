@@ -18,18 +18,13 @@ WORKDIR /
 ADD start_ipfs.sh /usr/local/bin/start_ipfs
 RUN chmod a+x /usr/local/bin/start_ipfs
 
-# NOTE: ADD UPDATE SCRIPTS HERE FOR ALL STATIC WEBSITES
-# MEMEFACTORY
-ADD update-memefactory-ui.sh /usr/bin/update-memefactory-ui
-RUN chmod a+x /usr/bin/update-memefactory-ui
-
 # swarm tcp
 #EXPOSE 4001
 
 # swarm uTP
 #EXPOSE 4002/udp
 
-# api 
+# api
 #EXPOSE 5001
 
 # gateway

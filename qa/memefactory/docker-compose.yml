@@ -2,11 +2,11 @@ version: "3"
 services:
 
   memefactory-server:
-    build: memefactory/server
+    image: district0x/memefactory-server:latest
     container_name: qa_memefactory-server
     depends_on:
       - ipfs-daemon
-#      - parity     
+#      - parity
     networks:
       - memefactory-net
       - ipfs-net
@@ -26,7 +26,7 @@ services:
       - memefactory-net
 
   memefactory-ui:
-    build: memefactory/ui
+    image: district0x/memefactory-ui:latest
     container_name: qa_memefactory-ui
     depends_on:
      - memefactory-server
@@ -37,6 +37,13 @@ services:
       - 80:80
     networks:
       - ipfs-net
+
+  watchtower:
+    image: v2tec/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: watchtower memefactory-server memefactory-ui --interval 30
 
 networks:
   memefactory-net:
