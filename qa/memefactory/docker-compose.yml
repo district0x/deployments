@@ -14,6 +14,8 @@ services:
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
+    labels:
+     - "com.centurylinklabs.watchtower.enable=true"
 
   memefactory-api:
     build: memefactory/api
@@ -24,8 +26,6 @@ services:
       - 6300:6300
     networks:
       - memefactory-net
-    labels:
-     - "com.centurylinklabs.watchtower.enable=true"
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest

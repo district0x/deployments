@@ -68,7 +68,11 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --label-enable --cleanup --interval 600
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=https://hooks.slack.com/services/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
+      - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=QA-Watchtower-Service
+    command: --label-enable --cleanup --interval 30
 
 networks:
   ipfs-net:
