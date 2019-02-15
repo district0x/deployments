@@ -45,20 +45,16 @@ sudo chmod a+x /usr/local/bin/docker-compose
 ```
 
 ## Usage
-
 - [QA enviroment](#qa)
-  - [parity]()
-    - [parity](#parity)
-    - [ropsten](#parity-ropsten)
-  - [ipfs](#ipfs)
-    - [daemon](#ipfs-daemon)
-          - [update scripts](#update-scripts)
-    - [api](#ipfs-api)
-    - [gateway](#)
-  - [memefactory](#memfactory)
-    - [server](#memfactory-server)
-    - [api](#memefactory-api)
-    - [ui](#memefactory-ui)
+  - [parity](#parity)
+  - [ipfs daemon](#ipfs-daemon)
+  - [ipfs api](#ipfs-api)
+  - [ipfs gateway](#gateway)
+- [memefactory](#memfactory)
+  - [memefatory server](#memfactory-server)
+  - [memefatory api](#memefactory-api)
+  - [memefatory ui](#memefactory-ui)
+  - [watchtower](#watchtower)
 - [base](#base)
 
 ## <a name="qa"> QA enviroment </a>
@@ -71,60 +67,29 @@ docker-compose -f docker-compose.yml \
                -f memefactory/docker-compose.yml up -d
 ```
 
-## <a> parity services </a>
-
-Parity service is currently a systemd service instead of docker service because of weird behavior when running inside a docker container.
+These containers define all the basic services needed in the QA environment:
 
 ### <a name="parity"> parity </a>
+Parity service is currently a monit service instead of docker service because of weird behavior when running inside a docker container.
 
-For starting, stopping, status checking of parity service you can use
+For starting, stopping, status checking of parity service you can use:
 
 ```bash
-sudo systemctl status parity
-sudo systemctl stop parity
-sudo systemctl start parity
+sudo monit status parity
+sudo monit stop parity
+sudo monit start parity
 ```
 
 It will run `/home/ubuntu/run_parity.sh`
 
-Service configuration file is `/etc/systemd/system/parity.service`
+Service configuration file is `/etc/monit/conf.d/parity.cfg`
 
 It will expose parity's JSON rpc on port 8545.
-
-## <a name="ipfs"> ipfs services </a>
 
 ### <a name="ipfs-daemon"> ipfs daemon </a>
 
 This service provides the ipfs daemon.
 No ports are exposed to the host, and the containers that wish to have access to ipfs should join the `ipfs-net` network.
-
-*NOTE*
-
-[IPNS](https://docs.ipfs.io/guides/concepts/ipns/) is used for storing all static content, allowing for seemless updates without changing any configuration.
-
-Private keys are used to keep track of the content published under the same IPNS hashes (peer ids), and they are stored in a `data` volume shared between container and the host.
-
-In order to publish new content you need to generate new key:
-
-```bash
-ipfs key gen --type=rsa --size=2048 <my-district-qa>
-```
-
-and store it in the host directory `/home/$USER/ipfs-docker/`.
-
-You should also add an executable [update script](https://github.com/district0x/deployments/blob/master/qa/ipfs/daemon/update-memefactory-ui.sh) to the image of this container, which publishes the new content under the corresponding peer-id:
-
-```bash
-docker exec -it qa_ipfs-daemon <update-my-district>
-```
-
-#### <a name="update-scripts"> update scripts </a>
-
-* updating MemeFactory static content served by the UI [container](#memefactory-ui):
-
-```bash
-docker exec -it qa_ipfs-daemon update-memefactory-ui
-```
 
 ### <a name="ipfs-api"> ipfs api </a>
 
@@ -136,9 +101,9 @@ This container exposes IPFS read-only gateway on port 8080 to the host.
 
 ## <a name="memefactory"> memefactory services </a>
 
-These containers define all the services needed for running the [MemeFactory](http://memefactory.io) district.
+These containers define all the services needed for running the [MemeFactory](http://memefactory.io) district:
 
-### <a name="memfactory-server"> memefactory server </a>
+## <a name="memfactory-server"> memefactory server </a>
 
 This service is the server component of MemeFactory, which serves as cache for Blockchain events, it also runs a graphql endpoint.
 No ports are exposed to the host, and the containers that wish to have direct access should join the `memefactory-net` network.
@@ -149,8 +114,7 @@ This container exposes the graphql API of MemeFactory on host's port 6300.
 
 ### <a name="memefactory-ui"> memefactory ui </a>
 
-This container serves the content published under the memefactory-qa peer-id on the host's port 80.
-See [ipfs-daemon](#ipfs-daemon) container for updating this content.
+This container serves the static content.
 
 ## <a name="base"> base image </a>
 
