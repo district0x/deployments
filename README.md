@@ -50,11 +50,11 @@ sudo chmod a+x /usr/local/bin/docker-compose
   - [ipfs daemon](#ipfs-daemon)
   - [ipfs api](#ipfs-api)
   - [ipfs gateway](#gateway)
+  - [watchtower](#watchtower)
 - [memefactory](#memfactory)
   - [memefatory server](#memfactory-server)
   - [memefatory api](#memefactory-api)
   - [memefatory ui](#memefactory-ui)
-  - [watchtower](#watchtower)
 - [base](#base)
 
 ## <a name="qa"> QA enviroment </a>
@@ -98,6 +98,11 @@ This container exposes IPFS http API on port 5001 to the host.
 ### <a name="ipfs-gateway"> ipfs gateway </a>
 
 This container exposes IPFS read-only gateway on port 8080 to the host.
+
+### <a name="watchtower"> watchtower </a>
+
+This service checks for `latest` images and quietly updates running containers.
+Services subscribing do so by declaring a LABEL `com.centurylinklabs.watchtower.enable="true"`.
 
 ## <a name="memefactory"> memefactory services </a>
 

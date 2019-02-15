@@ -24,6 +24,8 @@ services:
       - 6300:6300
     networks:
       - memefactory-net
+    labels:
+     - "com.centurylinklabs.watchtower.enable=true"
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest
@@ -37,13 +39,8 @@ services:
       - 80:80
     networks:
       - ipfs-net
-
-  watchtower:
-    image: v2tec/watchtower:latest
-    container_name: watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: watchtower memefactory-server memefactory-ui --interval 600
+    labels:
+     - "com.centurylinklabs.watchtower.enable=true"
 
 networks:
   memefactory-net:
