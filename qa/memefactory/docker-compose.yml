@@ -43,7 +43,7 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: watchtower memefactory-server memefactory-ui --interval 30
+    command: watchtower memefactory-server memefactory-ui --interval 600
 
 networks:
   memefactory-net:
