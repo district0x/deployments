@@ -15,6 +15,7 @@ services:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
     labels:
+     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"
 
   memefactory-api:
