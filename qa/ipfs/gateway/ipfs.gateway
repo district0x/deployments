@@ -12,6 +12,7 @@ server {
   }
 
   location @ipfs {
+    proxy_read_timeout 120s;
     proxy_intercept_errors on;
     proxy_pass http://qa_ipfs-daemon:8080;
   }
