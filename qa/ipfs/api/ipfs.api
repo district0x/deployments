@@ -1,3 +1,8 @@
+upstream failover_api_servers {
+  server qa_ipfs-daemon:5001;
+  server ipfs.io backup;
+}
+
 server {
   listen 5001 default_server;
   server_name localhost ec2-52-42-54-97.us-west-2.compute.amazonaws.com ipfs.api.qa.district0x.io;
@@ -6,14 +11,21 @@ server {
     try_files $uri @ipfs;
   }
 
+  location @ipfs {
+    proxy_pass              http://failover_api_servers;
+    proxy_redirect          off;
+    proxy_next_upstream     timeout http_504;
+    proxy_connect_timeout   5s;
+    proxy_read_timeout      10s;
+    proxy_set_header        Host            $host;
+    proxy_set_header        X-Real-IP       $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_intercept_errors on;
+   }
+
   location = /X0X.html {
     root /usr/share/nginx/html/;
     internal;
-  }
-
-  location @ipfs {
-    proxy_intercept_errors on;
-    proxy_pass http://qa_ipfs-daemon:5001;
   }
 
    # redirect server error pages to the static error page
