@@ -3,7 +3,7 @@ MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
 # ENV variables
 ENV IPFS_LOGGING ""
-ENV IPFS_VERSION 0.4.18
+ENV IPFS_VERSION 0.4.19
 ENV IPFS_PATH /data/ipfs
 
 # install ipfs
