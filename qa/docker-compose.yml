@@ -39,7 +39,7 @@ services:
     container_name: qa_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
-      - /home/$USER/ipfs-docker-staging:/export
+#      - /home/$USER/ipfs-docker-staging:/export
     networks:
       - ipfs-net
 
