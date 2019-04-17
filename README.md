@@ -64,7 +64,7 @@ Start the services (but parity) in the QA environment:
 ``` bash
 cd qa/
 docker-compose -f docker-compose.yml \
-               -f memefactory/docker-compose.yml up -d
+               -f memefactory/docker-compose.yml up -d --build
 ```
 
 These containers define all the basic services needed in the QA environment:
@@ -123,6 +123,6 @@ This container serves the static content.
 
 ## <a name="base"> base image </a>
 
-Base image for docker district0x services availiable on [dockerhub](https://hub.docker.com/r/district0x/base/).
-Contains all dependencies needed for running and building districts service components.
+Base image for district0x development availiable on [dockerhub](https://hub.docker.com/r/district0x/base/).
+Contains all dependencies needed for running and building service components.
 Consult the image file for details of whats availiable.
