@@ -1,5 +1,9 @@
-FROM district0x/base:latest
+FROM debian:stretch-slim
 MAINTAINER "Filip Bielejec" <filip@district0x.io>
+
+RUN apt-get update -y \
+    && apt-get install --no-install-recommends -y \
+    -q wget
 
 # ENV variables
 ENV IPFS_LOGGING ""
@@ -35,7 +39,7 @@ RUN chmod a+x /usr/local/bin/start_ipfs
 
 # Expose the fs-repo as a volume.
 # start_ipfs initializes an fs-repo if none is mounted.
-# Important this happens after the USER directive so permission are correct.
+# Important this happens after the USER directive so permissions are correct.
 VOLUME $IPFS_PATH
 
 # This just makes sure that:

@@ -1,10 +1,10 @@
-FROM district0x/base:latest
+FROM debian:stretch-slim
 MAINTAINER "Filip Bielejec" <filip@district0x.io>
 
 # install nginx
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \
-    -q nginx
+    -q wget nginx
 
 # replace nginx config
 ADD nginx.conf /etc/nginx/nginx.conf
