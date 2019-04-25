@@ -38,11 +38,10 @@ services:
      - ipfs-gateway
     ports:
       - 80:80
-    networks:
-      - ipfs-net
-      - parity-net
+    # networks:
+    #   - ipfs-net
     labels:
-     - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.enable=true"
 
 networks:
   memefactory-net:
