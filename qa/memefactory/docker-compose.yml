@@ -10,15 +10,17 @@ services:
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
-    ports:
-      - 6300:6300
+    expose:
+      - 6300
     networks:
-      - memefactory-net
       - ipfs-net
       - parity-net
+      - default
     labels:
      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=api.memefactory.qa.district0x.io
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest
@@ -30,7 +32,3 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=memefactory.qa.district0x.io
-
-networks:
-  memefactory-net:
-    driver: "bridge"
