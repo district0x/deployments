@@ -18,10 +18,10 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
-    # ports:
-    #   - 8545:8545
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+    # ports:
+    #   - 8545:8545
     networks:
       - parity-net
 
@@ -30,29 +30,19 @@ services:
     container_name: qa_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
-#      - /home/$USER/ipfs-docker-staging:/export
-    networks:
-      - ipfs-net
-
-  ipfs-api:
-    build: ipfs/api
-    container_name: qa_ipfs-api
-    depends_on:
-      - ipfs-daemon
     ports:
       - 5001:5001
-    networks:
-      - ipfs-net
-
-  ipfs-gateway:
-    build: ipfs/gateway
-    container_name: qa_ipfs-gateway
-    depends_on:
-      - ipfs-daemon
-    ports:
       - 8080:8080
     networks:
       - ipfs-net
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy:latest
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
   watchtower:
     image: v2tec/watchtower:latest
@@ -66,6 +56,9 @@ services:
     command: --label-enable --cleanup --interval 300
 
 networks:
+  # default:
+  #   external:
+  #     name: nginx-proxy
   ipfs-net:
     driver: "bridge"
   parity-net:

@@ -7,41 +7,29 @@ services:
     depends_on:
       - ipfs-daemon
       - parity
-    networks:
-      - memefactory-net
-      - ipfs-net
-      - parity-net
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
-    labels:
-     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
-     - "com.centurylinklabs.watchtower.enable=true"
-
-  memefactory-api:
-    build: memefactory/api
-    container_name: qa_memefactory-api
-    depends_on:
-      - memefactory-server
     ports:
       - 6300:6300
     networks:
       - memefactory-net
+      - ipfs-net
+      - parity-net
+    labels:
+     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
+     - "com.centurylinklabs.watchtower.enable=true"
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest
     container_name: qa_memefactory-ui
     depends_on:
      - memefactory-server
-     - memefactory-api
-     - ipfs-api
-     - ipfs-gateway
-    ports:
-      - 80:80
-    # networks:
-    #   - ipfs-net
+     - ipfs-daemon
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=memefactory.qa.district0x.io
 
 networks:
   memefactory-net:
