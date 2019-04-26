@@ -14,8 +14,9 @@ services:
     expose:
       - 6300
     # networks:
-      # - parity-net
-      # - default
+    #   - ipfs-net  
+    #   - parity-net
+    #   - default
     labels:
      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"

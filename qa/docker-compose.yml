@@ -18,16 +18,17 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
-    ports:
-      - 8545:8545      
+    # ports:
+    #   - 8545:8545
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
     # networks:
     #   - parity-net
+    #   - default
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=ropsten.district0x.io
-    
+
   ipfs-daemon:
     build: ipfs/daemon
     container_name: qa_ipfs-daemon
@@ -46,7 +47,7 @@ services:
       - default
     environment:
       - VIRTUAL_HOST=ipfs.qa.district0x.io
-       
+
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
     container_name: nginx-proxy
