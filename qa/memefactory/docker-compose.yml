@@ -6,16 +6,16 @@ services:
     container_name: qa_memefactory-server
     depends_on:
       - ipfs-daemon
+      - ipfs-server
       - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
     expose:
       - 6300
-    networks:
-      - ipfs-net
-      - parity-net
-      - default
+    # networks:
+      # - parity-net
+      # - default
     labels:
      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"
@@ -27,7 +27,6 @@ services:
     container_name: qa_memefactory-ui
     depends_on:
      - memefactory-server
-     - ipfs-daemon
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
