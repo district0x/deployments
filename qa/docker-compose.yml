@@ -60,18 +60,18 @@ services:
       - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ${NGINX_DATA_PATH}/certs:/etc/nginx/certs
-      - ${NGINX_DATA_PATH}/vhost:/etc/nginx/vhost.d
-      - ${NGINX_DATA_PATH}/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker//certs:/etc/nginx/certs
+      - /home/$USER/nginx-docker/vhost:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
     container_name: letsencrypt
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${NGINX_DATA_PATH}/certs:/etc/nginx/certs:rw
-      - ${NGINX_DATA_PATH}/vhost:/etc/nginx/vhost.d
-      - ${NGINX_DATA_PATH}/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker/certs:/etc/nginx/certs:rw
+      - /home/$USER/nginx-docker/vhost:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
       
