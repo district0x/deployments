@@ -7,7 +7,7 @@ services:
     command:
       --chain ropsten
       --base-path /home/parity/.local/share/io.parity.ethereum/
-      --jsonrpc-apis 'web3,eth,net,parity,personal'
+      --jsonrpc-apis 'web3,eth,net,parity'
       --jsonrpc-interface '0.0.0.0'
       --jsonrpc-hosts none
       --jsonrpc-cors '*'
@@ -28,6 +28,8 @@ services:
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=ropsten.district0x.io
+      - LETSENCRYPT_HOST=ropsten.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
 
   ipfs-daemon:
     build: ipfs/daemon
@@ -47,15 +49,32 @@ services:
       - default
     environment:
       - VIRTUAL_HOST=ipfs.qa.district0x.io
+      - LETSENCRYPT_HOST=ipfs.qa.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
     container_name: nginx-proxy
     ports:
       - 80:80
+      - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ${NGINX_DATA_PATH}/certs:/etc/nginx/certs
+      - ${NGINX_DATA_PATH}/vhost:/etc/nginx/vhost.d
+      - ${NGINX_DATA_PATH}/html:/usr/share/nginx/html
 
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+    container_name: letsencrypt
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${NGINX_DATA_PATH}/certs:/etc/nginx/certs:rw
+      - ${NGINX_DATA_PATH}/vhost:/etc/nginx/vhost.d
+      - ${NGINX_DATA_PATH}/html:/usr/share/nginx/html
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      
   watchtower:
     image: v2tec/watchtower:latest
     container_name: watchtower
