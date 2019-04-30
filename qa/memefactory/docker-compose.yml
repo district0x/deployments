@@ -21,6 +21,7 @@ services:
      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"
     environment:
+      - VIRTUAL_PORT=6300
       - VIRTUAL_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io

@@ -86,11 +86,10 @@ services:
 
   stage-nginx:
     container_name: stage-nginx
-    restart: always
     image: jwilder/nginx-proxy:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - /opt/myApp/stage/certs:/etc/nginx/certs
       - /opt/myApp/stage/vhost.d:/etc/nginx/vhost.d
@@ -101,8 +100,6 @@ services:
     environment:
       - DEFAULT_HOST=qa.district0x.io
     restart: always
-
-  # Automatically manages HTTPS certs in nginx-proxy
 
   stage-letsencrypt:
     container_name: stage-letsencrypt
