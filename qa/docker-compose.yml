@@ -85,8 +85,8 @@ services:
   #   restart: always
 
   stage-nginx:
-    container_name: stage-nginx
     image: jwilder/nginx-proxy:latest
+    container_name: stage-nginx
     ports:
       - 80:80
       - 443:443
@@ -102,9 +102,8 @@ services:
     restart: always
 
   stage-letsencrypt:
-    container_name: stage-letsencrypt
-    restart: always
     image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: stage-letsencrypt
     depends_on:
       - stage-nginx
     volumes:
@@ -114,7 +113,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  
+    restart: always
+
   watchtower:
     image: v2tec/watchtower:latest
     container_name: watchtower
