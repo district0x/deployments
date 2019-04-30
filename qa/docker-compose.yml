@@ -104,6 +104,7 @@ services:
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
     container_name: nginx-proxy
+    ports:
       - "80:80"
       - "443:443"
     volumes:
