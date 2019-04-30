@@ -91,9 +91,9 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /opt/myApp/stage/certs:/etc/nginx/certs
-      - /opt/myApp/stage/vhost.d:/etc/nginx/vhost.d
-      - /opt/myApp/stage/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker/certs:/etc/nginx/certs
+      - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
@@ -107,9 +107,9 @@ services:
     depends_on:
       - stage-nginx
     volumes:
-      - /opt/myApp/stage/certs:/etc/nginx/certs
-      - /opt/myApp/stage/vhost.d:/etc/nginx/vhost.d
-      - /opt/myApp/stage/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker/certs:/etc/nginx/certs
+      - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
