@@ -65,7 +65,8 @@ services:
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/conf:/etc/nginx/conf.d
       - /home/$USER/nginx-docker/dhparam:/etc/nginx/dhparam
-      
+    network_mode: bridge
+
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
     container_name: letsencrypt
@@ -74,9 +75,12 @@ services:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs:rw
       - /home/$USER/nginx-docker/vhost:/etc/nginx/vhost.d
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker/conf:/etc/nginx/conf.d
+      - /home/$USER/nginx-docker/dhparam:/etc/nginx/dhparam
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
-      
+    network_mode: bridge
+    
   watchtower:
     image: v2tec/watchtower:latest
     container_name: watchtower
