@@ -27,6 +27,7 @@ services:
     #   - default
     environment:
       - VIRTUAL_PORT=8545
+      - VIRTUAL_PROTO=https
       - VIRTUAL_HOST=ropsten.district0x.io
       - LETSENCRYPT_HOST=ropsten.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
