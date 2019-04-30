@@ -100,24 +100,23 @@ services:
   #     - /home/$USER/nginx-docker/certs:/etc/nginx/certs:rw
   #     - /var/run/docker.sock:/var/run/docker.sock:ro
   #   restart: always
-    
+
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
     container_name: nginx-proxy
-    ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs:ro
       - /home/$USER/nginx-docker/vhost:/etc/nginx/vhost.d
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/conf:/etc/nginx/conf.d
-      - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd:ro      
+      - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd:ro
     restart: always
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
-      
+
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
     container_name: letsencrypt
@@ -132,7 +131,7 @@ services:
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     restart: always
-      
+
   watchtower:
     image: v2tec/watchtower:latest
     container_name: watchtower
