@@ -114,8 +114,9 @@ services:
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/conf:/etc/nginx/conf.d
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd:ro      
-      # - /home/$USER/nginx-docker/dhparam:/etc/nginx/dhparam
     restart: always
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
       
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
@@ -128,7 +129,6 @@ services:
       - /home/$USER/nginx-docker/vhost:/etc/nginx/vhost.d
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/conf:/etc/nginx/conf.d
-      # - /home/$USER/nginx-docker/dhparam:/etc/nginx/dhparam
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     restart: always
