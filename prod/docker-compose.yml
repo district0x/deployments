@@ -99,7 +99,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      # - prod_parity
+      # - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
