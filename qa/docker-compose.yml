@@ -47,9 +47,9 @@ services:
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
-  stage-nginx:
+    nginx:
     image: jwilder/nginx-proxy:latest
-    container_name: stage-nginx
+    container_name: qa_nginx
     ports:
       - 80:80
       - 443:443
@@ -64,11 +64,11 @@ services:
       - DEFAULT_HOST=qa.district0x.io
     restart: always
 
-  stage-letsencrypt:
+    letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: stage-letsencrypt
+    container_name: qa_letsencrypt
     depends_on:
-      - stage-nginx
+      - nginx
     volumes:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
       - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d

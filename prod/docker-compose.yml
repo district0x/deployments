@@ -1,6 +1,8 @@
 version: "3"
 services:
 
+  # --- BASE SERVICES ---#
+
   # parity:
   #   image: parity/parity:v2.3.8
   #   container_name: prod_parity
@@ -46,9 +48,9 @@ services:
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
-    prod-nginx:
+  nginx:
     image: jwilder/nginx-proxy:latest
-    container_name: prod-nginx
+    container_name: prod_nginx
     ports:
       - 80:80
       - 443:443
@@ -63,11 +65,11 @@ services:
       - DEFAULT_HOST=district0x.io
     restart: always
 
-    prod-letsencrypt:
+    letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: prod-letsencrypt
+    container_name: prod_letsencrypt
     depends_on:
-      - prod-nginx
+      - nginx
     volumes:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
       - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
@@ -88,8 +90,8 @@ services:
       - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=QA-Watchtower-Service
     command: --label-enable --cleanup --interval 300
 
-    # --- MEMEFACTORY---#
-    
+    # --- MEMEFACTORY SERVICES ---#
+
   memefactory-server:
     image: district0x/memefactory-server:release
     container_name: prod_memefactory-server
@@ -121,7 +123,7 @@ services:
       - VIRTUAL_HOST=memefactory.io
       - LETSENCRYPT_HOST=memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
-    
+
 networks:
   ipfs-net:
     driver: "bridge"
