@@ -65,7 +65,7 @@ services:
       - DEFAULT_HOST=district0x.io
     restart: always
 
-    letsencrypt:
+  letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: prod_letsencrypt
     depends_on:
