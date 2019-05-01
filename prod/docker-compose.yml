@@ -58,6 +58,7 @@ services:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
       - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
+      - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
