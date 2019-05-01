@@ -29,7 +29,7 @@ services:
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
-    container_name: prod_ipfs-daemon
+    container_name: ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
@@ -98,7 +98,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      # - parity
+      # - prod_parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs

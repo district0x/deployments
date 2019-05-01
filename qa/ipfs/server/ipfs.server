@@ -1,10 +1,10 @@
 upstream failover_api_servers {
-  server qa_ipfs-daemon:5001;
+  server ipfs-daemon:5001;
   server ipfs.io backup;
 }
 
 upstream failover_gateways {
-  server qa_ipfs-daemon:8080;
+  server ipfs-daemon:8080;
   server ipfs.io backup;
 }
 

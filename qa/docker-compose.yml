@@ -28,7 +28,7 @@ services:
 
   ipfs-daemon:
     build: ipfs/daemon
-    container_name: qa_ipfs-daemon
+    container_name: ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
@@ -47,7 +47,7 @@ services:
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
-    nginx:
+  nginx:
     image: jwilder/nginx-proxy:latest
     container_name: qa_nginx
     ports:
@@ -64,7 +64,7 @@ services:
       - DEFAULT_HOST=qa.district0x.io
     restart: always
 
-    letsencrypt:
+  letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: qa_letsencrypt
     depends_on:
