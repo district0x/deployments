@@ -1,0 +1,127 @@
+version: "3"
+services:
+
+  # parity:
+  #   image: parity/parity:v2.3.8
+  #   container_name: prod_parity
+  #   command:
+  #     --base-path /home/parity/.local/share/io.parity.ethereum/
+  #     --jsonrpc-apis 'web3,eth,net,parity'
+  #     --jsonrpc-interface '0.0.0.0'
+  #     --jsonrpc-hosts none
+  #     --jsonrpc-cors '*'
+  #     --cache-size 6000
+  #     --db-compaction ssd
+  #     --mode active
+  #     --pruning fast
+  #     --logging info
+  #     --geth
+  #     --jsonrpc-port 8545
+  #   volumes:
+  #     - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+  #   environment:
+  #     - VIRTUAL_PORT=8545
+  #     - VIRTUAL_HOST=mainnet.district0x.io
+  #     - LETSENCRYPT_HOST=ropsten.district0x.io
+  #     - LETSENCRYPT_EMAIL=filip@district0x.io
+
+  ipfs-daemon:
+    image: district0x/ipfs-daemon:latest
+    container_name: prod_ipfs-daemon
+    volumes:
+      - /home/$USER/ipfs-docker:/data/ipfs
+    networks:
+      - ipfs-net
+
+  ipfs-server:
+    image: district0x/ipfs-server:latest
+    container_name: prod_ipfs-server
+    depends_on:
+      - ipfs-daemon
+    networks:
+      - ipfs-net
+      - default
+    environment:
+      - VIRTUAL_HOST=ipfs.district0x.io
+      - LETSENCRYPT_HOST=ipfs.qa.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
+    prod-nginx:
+    image: jwilder/nginx-proxy:latest
+    container_name: prod-nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/$USER/nginx-docker/certs:/etc/nginx/certs
+      - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    environment:
+      - DEFAULT_HOST=district0x.io
+    restart: always
+
+    prod-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: prod-letsencrypt
+    depends_on:
+      - prod-nginx
+    volumes:
+      - /home/$USER/nginx-docker/certs:/etc/nginx/certs
+      - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      # AND
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
+
+  watchtower:
+    image: v2tec/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=https://hooks.slack.com/services/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
+      - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=QA-Watchtower-Service
+    command: --label-enable --cleanup --interval 300
+
+    # --- MEMEFACTORY---#
+    
+  memefactory-server:
+    image: district0x/memefactory-server:release
+    container_name: prod_memefactory-server
+    depends_on:
+      - ipfs-daemon
+      - ipfs-server
+      - parity
+    volumes:
+      - /home/$USER/logs:/logs
+      - /home/$USER/configs:/configs
+    expose:
+      - 6300
+    labels:
+     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
+     - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=api.memefactory.io
+      - LETSENCRYPT_HOST=api.memefactory.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
+  memefactory-ui:
+    image: district0x/memefactory-ui:release
+    container_name: prod_memefactory-ui
+    depends_on:
+     - memefactory-server
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=memefactory.io
+      - LETSENCRYPT_HOST=memefactory.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+    
+networks:
+  ipfs-net:
+    driver: "bridge"
