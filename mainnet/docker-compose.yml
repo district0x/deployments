@@ -17,6 +17,8 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
+    ports:
+      - 8454:8454  
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
