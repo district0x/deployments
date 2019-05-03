@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  parity:
+    image: parity/parity:stable
+    container_name: mainnet_parity
+    command:
+      --base-path /home/parity/.local/share/io.parity.ethereum/
+      --jsonrpc-apis 'web3,eth,net,parity,personal'
+      --jsonrpc-interface '0.0.0.0'
+      --jsonrpc-hosts none
+      --jsonrpc-cors '*'
+      --cache-size 6000
+      --db-compaction ssd
+      --mode active
+      --pruning fast
+      --logging info
+      --geth
+      --jsonrpc-port 8545
+    volumes:
+      - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    image: v2tec/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=https://hooks.slack.com/services/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
+      - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=Mainnet-Watchtower-Service
+    command: --label-enable --cleanup --interval 300

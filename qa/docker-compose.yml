@@ -2,7 +2,7 @@ version: "3"
 services:
 
   parity:
-    image: parity/parity:v2.3.8
+    image: parity/parity:stable
     container_name: qa_parity
     command:
       --chain ropsten
@@ -20,6 +20,8 @@ services:
       --jsonrpc-port 8545
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=ropsten.district0x.io
