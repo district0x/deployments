@@ -107,6 +107,20 @@ services:
       - LETSENCRYPT_HOST=district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
+  # --- NAMEBAZAAR SERVICES ---#
+
+  namebazaar-ui:
+    image: district0x/namebazaar-ui:release
+    container_name: prod_namebazaar-ui
+    depends_on:
+     - nginx
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=namebazaar.io
+      - LETSENCRYPT_HOST=namebazaar.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
   # --- MEMEFACTORY SERVICES ---#
 
   memefactory-server:
@@ -122,8 +136,8 @@ services:
     expose:
       - 6300
     labels:
-     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
-     - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=api.memefactory.io
       - LETSENCRYPT_HOST=api.memefactory.io
@@ -133,7 +147,8 @@ services:
     image: district0x/memefactory-ui:release
     container_name: prod_memefactory-ui
     depends_on:
-     - memefactory-server
+      - memefactory-server
+      - nginx
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
