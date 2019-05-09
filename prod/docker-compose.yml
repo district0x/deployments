@@ -122,6 +122,20 @@ services:
       - LETSENCRYPT_HOST=namebazaar.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
+  # --- ETHLANCE SERVICES ---#
+
+  ethlance-ui:
+    image: district0x/ethlance-ui:release
+    container_name: prod_ethlance-ui
+    depends_on:
+     - nginx
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=ethlance.com
+      - LETSENCRYPT_HOST=ethlance.com
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
   # --- MEMEFACTORY SERVICES ---#
 
   memefactory-server:
