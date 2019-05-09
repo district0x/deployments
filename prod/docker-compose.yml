@@ -136,6 +136,14 @@ services:
       - LETSENCRYPT_HOST=ethlance.com
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
+  ethlance-emailer:
+    image: district0x/ethlance-emailer:release
+    container_name: prod_ethlance-emailer
+    # depends_on:
+      # - parity
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
   # --- MEMEFACTORY SERVICES ---#
 
   memefactory-server:
