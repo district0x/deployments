@@ -3,31 +3,31 @@ services:
 
   # --- BASE SERVICES ---#
 
-  # parity:
-  #   image: parity/parity:stable
-  #   container_name: prod_parity
-  #   command:
-  #     --base-path /home/parity/.local/share/io.parity.ethereum/
-  #     --jsonrpc-apis 'web3,eth,net,parity'
-  #     --jsonrpc-interface '0.0.0.0'
-  #     --jsonrpc-hosts none
-  #     --jsonrpc-cors '*'
-  #     --cache-size 6000
-  #     --db-compaction ssd
-  #     --mode active
-  #     --pruning fast
-  #     --logging info
-  #     --geth
-  #     --jsonrpc-port 8545
-  #   volumes:
-  #     - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
-  #   labels:
-  #     - "com.centurylinklabs.watchtower.enable=true"
-  #   environment:
-  #     - VIRTUAL_PORT=8545
-  #     - VIRTUAL_HOST=mainnet.district0x.io
-  #     - LETSENCRYPT_HOST=mainnet.district0x.io
-  #     - LETSENCRYPT_EMAIL=filip@district0x.io
+  parity:
+    image: parity/parity:stable
+    container_name: prod_parity
+    command:
+      --base-path /home/parity/.local/share/io.parity.ethereum/
+      --jsonrpc-apis 'web3,eth,net,parity'
+      --jsonrpc-interface '0.0.0.0'
+      --jsonrpc-hosts none
+      --jsonrpc-cors '*'
+      --cache-size 6000
+      --db-compaction ssd
+      --mode active
+      --pruning fast
+      --logging info
+      --geth
+      --jsonrpc-port 8545
+    volumes:
+      - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    # environment:
+    #   - VIRTUAL_PORT=8545
+    #   - VIRTUAL_HOST=mainnet.district0x.io
+    #   - LETSENCRYPT_HOST=mainnet.district0x.io
+    #   - LETSENCRYPT_EMAIL=filip@district0x.io
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
@@ -139,8 +139,8 @@ services:
   ethlance-emailer:
     image: district0x/ethlance-emailer:release
     container_name: prod_ethlance-emailer
-    # depends_on:
-      # - parity
+    depends_on:
+      - parity
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
@@ -152,7 +152,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      # - parity
+      - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
