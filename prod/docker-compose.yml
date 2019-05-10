@@ -109,6 +109,21 @@ services:
       - LETSENCRYPT_HOST=contribution.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
+  # --- VOTING PAGE ---#
+
+  district0x-voting-page:
+    image: district0x/voting-ui:release
+    container_name: district0x-voting-page
+    depends_on:
+      - nginx
+      - letsencrypt
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=vote.district0x.io
+      - LETSENCRYPT_HOST=vote.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
   # --- LANDING PAGE ---#
 
   district0x-landing-page:
