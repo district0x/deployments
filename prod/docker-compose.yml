@@ -70,7 +70,7 @@ services:
     restart: always
 
   letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
     container_name: prod_letsencrypt
     depends_on:
       - nginx
@@ -94,6 +94,21 @@ services:
       - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=Prod-Watchtower-Service
     command: --label-enable --cleanup --interval 300
 
+    # --- CONTRIBUTION PAGE ---#
+
+  district0x-contribution-page:
+    image: district0x/contribution-ui:release
+    container_name: district0x-contribution-page
+    depends_on:
+      - nginx
+      - letsencrypt
+    # labels:
+    #   - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=contribution.district0x.io
+      - LETSENCRYPT_HOST=contribution.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+
   # --- LANDING PAGE ---#
 
   district0x-landing-page:
@@ -101,6 +116,7 @@ services:
     container_name: district0x-landing-page
     depends_on:
       - nginx
+      - letsencrypt
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
@@ -115,6 +131,7 @@ services:
     container_name: prod_namebazaar-ui
     depends_on:
      - nginx
+     - letsencrypt
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
@@ -129,6 +146,7 @@ services:
     container_name: prod_ethlance-ui
     depends_on:
      - nginx
+     - letsencrypt
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
@@ -172,6 +190,7 @@ services:
     depends_on:
       - memefactory-server
       - nginx
+      - letsencrypt
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
