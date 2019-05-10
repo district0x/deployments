@@ -23,11 +23,11 @@ services:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    # environment:
-    #   - VIRTUAL_PORT=8545
-    #   - VIRTUAL_HOST=mainnet.district0x.io
-    #   - LETSENCRYPT_HOST=mainnet.district0x.io
-    #   - LETSENCRYPT_EMAIL=filip@district0x.io
+    environment:
+      - VIRTUAL_PORT=8545
+      - VIRTUAL_HOST=mainnet.district0x.io
+      - LETSENCRYPT_HOST=mainnet.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
