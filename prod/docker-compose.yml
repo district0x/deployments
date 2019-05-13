@@ -31,11 +31,13 @@ services:
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
-    container_name: ipfs-daemon
+    container_name: prod_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-server:
     image: district0x/ipfs-server:latest
@@ -45,6 +47,8 @@ services:
     networks:
       - ipfs-net
       - default
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=ipfs.district0x.io
       - LETSENCRYPT_HOST=ipfs.district0x.io

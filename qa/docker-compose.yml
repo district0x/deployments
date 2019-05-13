@@ -29,21 +29,25 @@ services:
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
   ipfs-daemon:
-    build: ipfs/daemon
-    container_name: ipfs-daemon
+    image: district0x/ipfs-daemon:latest
+    container_name: qa_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-server:
-    build: ipfs/server
+    image: district0x/ipfs-server:latest
     container_name: qa_ipfs-server
     depends_on:
       - ipfs-daemon
     networks:
       - ipfs-net
       - default
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
