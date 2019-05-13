@@ -46,6 +46,8 @@ services:
     networks:
       - ipfs-net
       - default
+    volumes:
+      - /home/$USER/nginx-docker/cache:/etc/nginx/cache
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
