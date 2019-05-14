@@ -20,6 +20,7 @@ services:
       - VIRTUAL_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: on-failure
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest

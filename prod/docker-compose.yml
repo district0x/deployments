@@ -176,6 +176,7 @@ services:
       - parity
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+    restart: on-failure
 
   # --- MEMEFACTORY SERVICES ---#
 
@@ -198,6 +199,7 @@ services:
       - VIRTUAL_HOST=api.memefactory.io
       - LETSENCRYPT_HOST=api.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: on-failure
 
   memefactory-ui:
     image: district0x/memefactory-ui:release
