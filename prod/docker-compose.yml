@@ -21,8 +21,6 @@ services:
       --jsonrpc-port 8545
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=mainnet.district0x.io
@@ -36,8 +34,6 @@ services:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-server:
     image: district0x/ipfs-server:latest
@@ -49,8 +45,6 @@ services:
       - default
     volumes:
       - /home/$USER/nginx-docker/cache:/etc/nginx/cache
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=ipfs.district0x.io
       - LETSENCRYPT_HOST=ipfs.district0x.io
