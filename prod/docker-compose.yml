@@ -201,14 +201,15 @@ services:
       - LETSENCRYPT_EMAIL=filip@district0x.io
     restart: on-failure
 
+  # TODO : temporary until prerendering is resolved
   memefactory-ui:
     image: district0x/memefactory-ui:release
     container_name: prod_memefactory-ui
-    command:
+    # command:
       # --enable-middleware-cache
       # --disable-ajax-preload
       # --disable-ajax-bypass
-      --bots-only
+      # --bots-only
     depends_on:
       - memefactory-server
       - nginx
@@ -219,8 +220,8 @@ services:
       - VIRTUAL_HOST=beta.memefactory.io
       - LETSENCRYPT_HOST=beta.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
-      - PRERENDER_TOKEN=$PRERENDER_TOKEN
-      - DEBUG=prerendercloud
+      # - PRERENDER_TOKEN=$PRERENDER_TOKEN
+      # - DEBUG=prerendercloud
 
 networks:
   ipfs-net:
