@@ -27,9 +27,9 @@ services:
     container_name: qa_memefactory-ui
     command:
       --enable-middleware-cache
-      --disable-ajax-preload
-      --disable-ajax-bypass
-      # --bots-only
+#      --disable-ajax-preload
+#      --disable-ajax-bypass
+      --bots-only
     depends_on:
      - memefactory-server
     labels:

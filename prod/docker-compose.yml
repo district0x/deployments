@@ -66,7 +66,7 @@ services:
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     environment:
-      - DEFAULT_HOST=production.district0x.io
+      - DEFAULT_HOST=prod.district0x.io
     restart: always
 
   letsencrypt:
@@ -204,6 +204,11 @@ services:
   memefactory-ui:
     image: district0x/memefactory-ui:release
     container_name: prod_memefactory-ui
+    command:
+      # --enable-middleware-cache
+      # --disable-ajax-preload
+      # --disable-ajax-bypass
+      --bots-only
     depends_on:
       - memefactory-server
       - nginx
@@ -214,6 +219,8 @@ services:
       - VIRTUAL_HOST=beta.memefactory.io
       - LETSENCRYPT_HOST=beta.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - PRERENDER_TOKEN=$PRERENDER_TOKEN
+      - DEBUG=prerendercloud
 
 networks:
   ipfs-net:
