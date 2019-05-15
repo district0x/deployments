@@ -32,6 +32,8 @@ services:
       --bots-only
     depends_on:
      - memefactory-server
+    volumes:
+      - /home/$USER/configs/_redirects:/app/_redirects
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
