@@ -181,7 +181,7 @@ services:
   # --- MEMEFACTORY SERVICES ---#
 
   memefactory-server:
-    image: district0x/memefactory-server:release
+    image: district0x/memefactory-server:prod
     container_name: prod_memefactory-server
     depends_on:
       - ipfs-daemon
