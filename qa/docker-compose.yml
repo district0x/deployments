@@ -140,7 +140,6 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
-      -
       - VIRTUAL_HOST=memefactory.qa.district0x.io
       - LETSENCRYPT_HOST=memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
