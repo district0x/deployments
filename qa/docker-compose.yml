@@ -1,6 +1,8 @@
 version: "3"
 services:
 
+  # --- BASE SERVICES ---#
+
   parity:
     image: parity/parity:stable
     container_name: qa_parity
@@ -98,6 +100,52 @@ services:
       - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=https://hooks.slack.com/services/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
       - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=QA-Watchtower-Service
     command: --label-enable --cleanup --interval 300
+
+  # --- MEMEFACTORY SERVICES ---#
+
+  memefactory-server:
+    image: district0x/memefactory-server:latest
+    container_name: qa_memefactory-server
+    depends_on:
+      - ipfs-daemon
+      - ipfs-server
+      - parity
+    volumes:
+      - /home/$USER/logs:/logs
+      - /home/$USER/configs:/configs
+    expose:
+      - 6300
+    labels:
+     - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
+     - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - CONFIG=/configs/meme.config.qa.edn
+      - VIRTUAL_HOST=api.memefactory.qa.district0x.io
+      - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: on-failure
+
+  memefactory-ui:
+    image: district0x/memefactory-ui:latest
+    container_name: qa_memefactory-ui
+    command:
+#      --enable-middleware-cache
+#      --disable-ajax-preload
+#      --disable-ajax-bypass
+      --bots-only
+    depends_on:
+     - memefactory-server
+    volumes:
+      - /home/$USER/configs/_redirects:/app/_redirects
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      -
+      - VIRTUAL_HOST=memefactory.qa.district0x.io
+      - LETSENCRYPT_HOST=memefactory.qa.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+      - PRERENDER_TOKEN=$PRERENDER_TOKEN
+      - DEBUG=prerendercloud
 
 networks:
   ipfs-net:
