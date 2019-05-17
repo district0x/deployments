@@ -211,8 +211,8 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
-      - VIRTUAL_HOST=beta.memefactory.io
-      - LETSENCRYPT_HOST=beta.memefactory.io
+      - VIRTUAL_HOST=memefactory.io
+      - LETSENCRYPT_HOST=memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
 
 networks:
