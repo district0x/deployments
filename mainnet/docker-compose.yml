@@ -40,9 +40,9 @@ services:
       --pruning fast
       --logging info
       --geth
-      --jsonrpc-port 8546
+      --jsonrpc-port 8549
     ports:
-      - 8546:8546
+      - 8546:8549
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
