@@ -24,6 +24,28 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
+  parity:
+    image: parity/parity:stable
+    container_name: ropsten_parity
+    command:
+      --chain ropsten
+      --base-path /home/parity/.local/share/io.parity.ethereum/
+      --jsonrpc-apis 'web3,eth,net,parity'
+      --jsonrpc-interface '0.0.0.0'
+      --jsonrpc-hosts none
+      --jsonrpc-cors '*'
+      --cache-size 6000
+      --db-compaction ssd
+      --mode active
+      --pruning fast
+      --logging info
+      --geth
+      --jsonrpc-port 8546
+    volumes:
+      - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
   watchtower:
     image: v2tec/watchtower:latest
     container_name: watchtower

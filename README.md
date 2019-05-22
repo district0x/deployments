@@ -54,7 +54,7 @@ sudo chmod a+x /usr/local/bin/docker-compose
   - [memefatory server](#prod_memfactory-server)
   - [memefatory ui](#prod_memefactory-ui)
 - [DEV](#dev)
-- [ganache](#dev_ganache)
+  - [ganache](#dev_ganache)
 
 ## <a name="qa"> QA enviroment </a>
 
