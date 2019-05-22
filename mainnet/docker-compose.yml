@@ -30,7 +30,7 @@ services:
     command:
       --chain ropsten
       --unlock c4e0b92df2de77c077d060e49ec63dc196980716
-      --password /home/$USER/c4e0b92df2de77c077d060e49ec63dc196980716.pass
+      --password /home/parity/c4e0b92df2de77c077d060e49ec63dc196980716.pass
       --base-path /home/parity/.local/share/io.parity.ethereum/
       --jsonrpc-apis 'web3,eth,net,parity,personal'
       --jsonrpc-interface '0.0.0.0'
@@ -46,6 +46,7 @@ services:
     ports:
       - 8546:8549
     volumes:
+      - /home/$USER/c4e0b92df2de77c077d060e49ec63dc196980716.pass:/home/parity/c4e0b92df2de77c077d060e49ec63dc196980716.pass
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
