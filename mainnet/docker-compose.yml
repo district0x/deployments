@@ -29,6 +29,8 @@ services:
     container_name: ropsten_parity
     command:
       --chain ropsten
+      --unlock c4e0b92df2de77c077d060e49ec63dc196980716
+      --password /home/$USER/c4e0b92df2de77c077d060e49ec63dc196980716.pass
       --base-path /home/parity/.local/share/io.parity.ethereum/
       --jsonrpc-apis 'web3,eth,net,parity'
       --jsonrpc-interface '0.0.0.0'
