@@ -103,10 +103,19 @@ Base image for district0x development.
 Contains all services needed for running and building districtc locally.
 Consult the docker-compose file for details of what's availiable.
 
-Start the services:
+Start the base services:
 
 ``` bash
 cd dev/
-export MEMEFACTORY_DIR=</path/to/memefactory/>
 docker-compose -f docker-compose.yml up --build
 ```
+
+If you want to start the memefactory services as well:
+
+``` bash
+cd dev/
+export MEMEFACTORY_DIR=</path/to/memefactory>
+docker-compose -f docker-compose.yml \
+               -f memefactory/docker-compose.yml up --build
+```
+

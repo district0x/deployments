@@ -23,11 +23,3 @@ services:
     ports:
       - 8080:8080
       - 5001:5001
-
-  memefactory-ui:
-    build: ui/
-    container_name: dev_memefactory-ui
-    ports:
-      - 3001:80
-    volumes:
-      - $MEMEFACTORY_DIR/resources/public:/usr/share/nginx/html/build/memefactory
