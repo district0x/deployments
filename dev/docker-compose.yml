@@ -1,0 +1,33 @@
+version: "3"
+services:
+
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    container_name: dev_ganache
+    command:
+      --deterministic
+      --mnemonic district0x
+      --port 8549
+      --gasLimit 8000000
+      --db /ganache-db
+    volumes:
+      - /home/$USER/ganache-docker/:/ganache-db
+    ports:
+      - 8549:8549
+
+  ipfs-daemon:
+    image: district0x/ipfs-daemon:latest
+    container_name: dev_ipfs-daemon
+    volumes:
+      - /home/$USER/ipfs-docker:/data/ipfs
+    ports:
+      - 8080:8080
+      - 5001:5001
+
+  memefactory-ui:
+    build: ui/
+    container_name: dev_memefactory-ui
+    ports:
+      - 3001:80
+    volumes:
+      - $MEMEFACTORY_DIR/resources/public:/usr/share/nginx/html/build/memefactory
