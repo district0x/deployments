@@ -1,7 +1,7 @@
 version: "3"
 services:
 
-  parity:
+  mainnet:
     image: parity/parity:stable
     container_name: mainnet_parity
     command:
@@ -24,7 +24,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  parity:
+  ropsten:
     image: parity/parity:stable
     container_name: ropsten_parity
     command:
