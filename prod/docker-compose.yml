@@ -28,6 +28,7 @@ services:
       - VIRTUAL_HOST=mainnet.district0x.io
       - LETSENCRYPT_HOST=mainnet.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: always
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest

@@ -29,6 +29,7 @@ services:
       - VIRTUAL_HOST=ropsten.district0x.io
       - LETSENCRYPT_HOST=ropsten.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: always
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
