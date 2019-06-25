@@ -193,6 +193,7 @@ services:
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
+      - /home/$USER/db:/db
     expose:
       - 6300
     labels:
