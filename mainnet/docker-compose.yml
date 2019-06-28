@@ -53,7 +53,7 @@ services:
 
   rinkeby:
     image: ethereum/client-go:stable
-    container_name: ropsten_parity
+    container_name: rinkeby_geth
     command:
       --rinkeby
       --rpc
