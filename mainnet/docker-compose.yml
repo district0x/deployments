@@ -42,12 +42,30 @@ services:
       --pruning fast
       --logging info
       --geth
-      --jsonrpc-port 8549
+      --jsonrpc-port 8545
     ports:
-      - 8546:8549
+      - 8546:8545
     volumes:
       - /home/$USER/c4e0b92df2de77c077d060e49ec63dc196980716.pass:/home/parity/c4e0b92df2de77c077d060e49ec63dc196980716.pass
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  rinkeby:
+    image: ethereum/client-go:stable
+    container_name: ropsten_parity
+    command:
+      --rinkeby
+      --rpc
+      --rpcapi db,eth,net,web3,personal
+      --rpcaddr "0.0.0.0"
+      --cache=6000
+      --rpcport 8545
+      --rpccorsdomain "*"
+    ports:
+      - 8547:8545
+    volumes:
+      - /home/$USER/rinkeby-docker/:/root/.ethereum
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
