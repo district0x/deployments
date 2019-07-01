@@ -62,6 +62,7 @@ services:
       --cache=6000
       --rpcport 8545
       --rpccorsdomain "*"
+      --rpcvhosts "*"
     ports:
       - 8547:8545
     volumes:
