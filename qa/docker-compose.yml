@@ -3,9 +3,31 @@ services:
 
   # --- BASE SERVICES ---#
 
-  parity:
+  rinkeby:
+    image: ethereum/client-go:stable
+    container_name: rinkeby_geth
+    command:
+      --rinkeby
+      --rpc
+      --rpcapi db,eth,net,web3
+      --rpcaddr "0.0.0.0"
+      --cache=6000
+      --rpcport 8545
+      --rpccorsdomain "*"
+    volumes:
+      - /home/$USER/rinkeby-docker/:/root/.ethereum
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_PORT=8545
+      - VIRTUAL_HOST=rinkeby.district0x.io
+      - LETSENCRYPT_HOST=rinkeby.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+    restart: always
+
+  ropsten:
     image: parity/parity:stable
-    container_name: qa_parity
+    container_name: ropsten_parity
     command:
       --chain ropsten
       --base-path /home/parity/.local/share/io.parity.ethereum/
