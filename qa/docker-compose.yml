@@ -14,6 +14,7 @@ services:
       --cache=6000
       --rpcport 8545
       --rpccorsdomain "*"
+      --rpcvhosts "*"
     volumes:
       - /home/$USER/rinkeby-docker/:/root/.ethereum
     labels:
