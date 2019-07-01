@@ -20,7 +20,7 @@ services:
     ports:
       - 8545:8545
     volumes:
-      - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+      - /home/$USER/mainnet-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 

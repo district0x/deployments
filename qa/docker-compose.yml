@@ -15,7 +15,7 @@ services:
       --rpcport 8545
       --rpccorsdomain "*"
     volumes:
-      - /home/$USER/geth-docker/:/root/.ethereum
+      - /home/$USER/rinkeby-docker/:/root/.ethereum
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
@@ -43,7 +43,7 @@ services:
       --geth
       --jsonrpc-port 8545
     volumes:
-      - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
+      - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
