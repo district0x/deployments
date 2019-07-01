@@ -15,7 +15,7 @@ services:
       --rpcport 8545
       --rpccorsdomain "*"
     volumes:
-      - /home/$USER/rinkeby-docker/:/root/.ethereum
+      - /home/$USER/geth-docker/:/root/.ethereum
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
