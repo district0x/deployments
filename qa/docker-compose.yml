@@ -184,7 +184,7 @@ services:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
     expose:
-      - 6400
+      - 6300
     labels:
      - "com.centurylinklabs.watchtower.stop-signal=SIGTERM"
      - "com.centurylinklabs.watchtower.enable=true"
