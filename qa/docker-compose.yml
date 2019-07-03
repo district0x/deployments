@@ -193,7 +193,7 @@ services:
       - VIRTUAL_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
-    restart: on-failure:1
+    restart: on-failure
 
   registry-ui:
     image: district0x/registry-ui:latest
