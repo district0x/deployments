@@ -35,6 +35,8 @@ services:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-server:
     image: district0x/ipfs-server:latest
@@ -67,7 +69,7 @@ services:
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
       - DEFAULT_HOST=prod.district0x.io
     restart: always
@@ -105,8 +107,8 @@ services:
     depends_on:
       - nginx
       - letsencrypt
-    # labels:
-    #   - "com.centurylinklabs.watchtower.enable=true"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=contribution.district0x.io
       - LETSENCRYPT_HOST=contribution.district0x.io
@@ -209,16 +211,20 @@ services:
   memefactory-ui:
     image: district0x/memefactory-ui:release
     container_name: prod_memefactory-ui
+    command:
+      --enable-middleware-cache
+      --disable-ajax-preload
+      --disable-ajax-bypass
+      --bots-only
     depends_on:
-      - memefactory-server
-      - nginx
-      - letsencrypt
+     - memefactory-server
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=memefactory.io
       - LETSENCRYPT_HOST=memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - PRERENDER_TOKEN=$PRERENDER_TOKEN
 
 networks:
   ipfs-net:

@@ -17,8 +17,6 @@ services:
       --rpcvhosts "*"
     volumes:
       - /home/$USER/rinkeby-docker/:/root/.ethereum
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=rinkeby.district0x.io
@@ -45,8 +43,6 @@ services:
       --jsonrpc-port 8545
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=ropsten.district0x.io
@@ -95,7 +91,7 @@ services:
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
       - DEFAULT_HOST=qa.district0x.io
     restart: always
@@ -154,14 +150,14 @@ services:
     image: district0x/memefactory-ui:latest
     container_name: qa_memefactory-ui
     command:
-#      --enable-middleware-cache
-#      --disable-ajax-preload
-#      --disable-ajax-bypass
+      --enable-middleware-cache
+      --disable-ajax-preload
+      --disable-ajax-bypass
       --bots-only
     depends_on:
      - memefactory-server
-    volumes:
-      - /home/$USER/configs/_redirects:/app/_redirects
+    # volumes:
+    #   - /home/$USER/configs/_redirects:/app/_redirects
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
