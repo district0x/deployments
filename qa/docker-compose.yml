@@ -41,6 +41,7 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
+      --tracing on
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     environment:
