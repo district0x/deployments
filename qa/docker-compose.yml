@@ -40,6 +40,7 @@ services:
       --pruning fast
       --logging info
       --geth
+      --poll-lifetime 180
       --jsonrpc-port 8545
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
