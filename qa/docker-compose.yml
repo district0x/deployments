@@ -22,6 +22,7 @@ services:
       - VIRTUAL_HOST=rinkeby.district0x.io
       - LETSENCRYPT_HOST=rinkeby.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
 
   ropsten:
@@ -46,11 +47,11 @@ services:
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     environment:
-      - SSL_POLICY=Mozilla-Modern
       - VIRTUAL_PORT=8545
       - VIRTUAL_HOST=ropsten.district0x.io
       - LETSENCRYPT_HOST=ropsten.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
 
   ipfs-daemon:
@@ -79,6 +80,7 @@ services:
       - VIRTUAL_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
 
   nginx:
     image: jwilder/nginx-proxy:latest
@@ -147,6 +149,7 @@ services:
       - VIRTUAL_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: on-failure
     stop_signal: SIGTERM
 
@@ -168,6 +171,7 @@ services:
       - VIRTUAL_HOST=memefactory.qa.district0x.io
       - LETSENCRYPT_HOST=memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
       - PRERENDER_TOKEN=$PRERENDER_TOKEN
       - DEBUG=prerendercloud
 
@@ -193,6 +197,7 @@ services:
       - VIRTUAL_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: on-failure
 
   registry-ui:
@@ -206,6 +211,7 @@ services:
       - VIRTUAL_HOST=registry.qa.district0x.io
       - LETSENCRYPT_HOST=registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
 networks:
   ipfs-net:
