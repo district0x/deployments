@@ -27,6 +27,7 @@ services:
       - VIRTUAL_HOST=mainnet.district0x.io
       - LETSENCRYPT_HOST=mainnet.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
 
   ipfs-daemon:
@@ -55,6 +56,7 @@ services:
       - VIRTUAL_HOST=ipfs.district0x.io
       - LETSENCRYPT_HOST=ipfs.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
 
   nginx:
     image: jwilder/nginx-proxy:latest
@@ -114,6 +116,7 @@ services:
       - VIRTUAL_HOST=contribution.district0x.io
       - LETSENCRYPT_HOST=contribution.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
   # --- VOTING PAGE ---#
 
@@ -129,6 +132,7 @@ services:
       - VIRTUAL_HOST=vote.district0x.io
       - LETSENCRYPT_HOST=vote.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
   # --- LANDING PAGE ---#
 
@@ -144,6 +148,7 @@ services:
       - VIRTUAL_HOST=district0x.io
       - LETSENCRYPT_HOST=district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
   # --- NAMEBAZAAR SERVICES ---#
 
@@ -159,6 +164,7 @@ services:
       - VIRTUAL_HOST=namebazaar.io
       - LETSENCRYPT_HOST=namebazaar.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
   # --- ETHLANCE SERVICES ---#
 
@@ -174,6 +180,7 @@ services:
       - VIRTUAL_HOST=ethlance.com
       - LETSENCRYPT_HOST=ethlance.com
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
 
   ethlance-emailer:
     image: district0x/ethlance-emailer:release
@@ -207,6 +214,7 @@ services:
       - VIRTUAL_HOST=api.memefactory.io
       - LETSENCRYPT_HOST=api.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: on-failure
     stop_signal: SIGTERM
 
@@ -226,6 +234,7 @@ services:
       - VIRTUAL_HOST=memefactory.io
       - LETSENCRYPT_HOST=memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
       - PRERENDER_TOKEN=$PRERENDER_TOKEN
 
 networks:
