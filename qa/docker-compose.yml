@@ -95,6 +95,7 @@ services:
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
+      - SSL_POLICY=Mozilla-Modern
       - DEFAULT_HOST=qa.district0x.io
     restart: always
 
