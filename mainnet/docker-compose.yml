@@ -17,6 +17,7 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
+      --poll-lifetime 180
     ports:
       - 8545:8545
     volumes:
@@ -43,6 +44,7 @@ services:
       --logging info
       --geth
       --jsonrpc-port 8545
+      --poll-lifetime 180
     ports:
       - 8546:8545
     volumes:
