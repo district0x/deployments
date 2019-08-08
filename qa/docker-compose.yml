@@ -93,6 +93,7 @@ services:
     volumes:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
       - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - ../shared/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
