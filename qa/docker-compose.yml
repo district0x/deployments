@@ -92,7 +92,7 @@ services:
       - 443:443
     volumes:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
-      # - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
+      - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
       - ./vhost.d/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
