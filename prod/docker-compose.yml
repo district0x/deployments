@@ -3,9 +3,9 @@ services:
 
   # --- BASE SERVICES ---#
 
-  parity:
+  mainnet:
     image: parity/parity:stable
-    container_name: prod_parity
+    container_name: mainnet_parity
     command:
       --base-path /home/parity/.local/share/io.parity.ethereum/
       --jsonrpc-apis 'web3,eth,net,parity'
@@ -102,7 +102,7 @@ services:
 
   watchtower:
     image: v2tec/watchtower:latest
-    container_name: watchtower
+    container_name: prod_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -195,7 +195,7 @@ services:
     image: district0x/ethlance-emailer:release
     container_name: prod_ethlance-emailer
     depends_on:
-      - parity
+      - mainnet
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     restart: on-failure
@@ -208,7 +208,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      - parity
+      - mainnet
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
