@@ -8,15 +8,3 @@ services:
       - 3001:80
     volumes:
       - $MEMEFACTORY_DIR/resources/public:/usr/share/nginx/html/build/memefactory
-
-  postgres:
-    image: postgres:latest
-    container_name: dev_postgres
-    volumes:
-      - /home/$USER/postgres-docker:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=district0x
-      - POSTGRES_DB=district0x

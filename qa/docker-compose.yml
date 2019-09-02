@@ -122,7 +122,7 @@ services:
 
   watchtower:
     image: v2tec/watchtower:latest
-    container_name: watchtower
+    container_name: qa_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
