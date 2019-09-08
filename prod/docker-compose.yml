@@ -109,7 +109,7 @@ services:
       - WATCHTOWER_NOTIFICATIONS=slack
       - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=$SLACK_HOOK_URL
       - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=Prod-Watchtower-Service
-    command: --label-enable --interval 300
+    command: --label-enable --cleanup --interval 300
 
     # --- CONTRIBUTION PAGE ---#
 
