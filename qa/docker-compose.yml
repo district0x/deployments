@@ -101,8 +101,6 @@ services:
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
-      - ./htpasswd/memefactory.qa.district0x.io:/etc/nginx/htpasswd/memefactory.qa.district0x.io
-      - ./htpasswd/registry.qa.district0x.io:/etc/nginx/htpasswd/registry.qa.district0x.io
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
