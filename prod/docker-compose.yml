@@ -226,7 +226,7 @@ services:
       - LETSENCRYPT_HOST=api.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: on-failure
+    restart: "on-failure:5"
     stop_signal: SIGTERM
 
   memefactory-ui:
