@@ -99,9 +99,9 @@ services:
       - ./vhost.d/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
-      - ./vhost.d/memefactory.qa.district0x.io_location:/etc/nginx/vhost.d/memefactory.qa.district0x.io_location
-      - ./vhost.d/registry.qa.district0x.io_location:/etc/nginx/vhost.d/registry.qa.district0x.io_location
-      - ./vhost.d/ipfs.qa.district0x.io_location:/etc/nginx/vhost.d/ipfs.qa.district0x.io_location
+      # - ./vhost.d/memefactory.qa.district0x.io_location:/etc/nginx/vhost.d/memefactory.qa.district0x.io_location
+      # - ./vhost.d/registry.qa.district0x.io_location:/etc/nginx/vhost.d/registry.qa.district0x.io_location
+      # - ./vhost.d/ipfs.qa.district0x.io_location:/etc/nginx/vhost.d/ipfs.qa.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
