@@ -110,7 +110,7 @@ services:
     restart: always
 
   letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:v1.12-rc.1
     container_name: qa_letsencrypt
     depends_on:
       - nginx

@@ -89,7 +89,7 @@ services:
     restart: always
 
   letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion:v1.12-rc.1
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
     container_name: prod_letsencrypt
     depends_on:
       - nginx
