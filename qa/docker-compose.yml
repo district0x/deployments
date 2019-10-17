@@ -45,6 +45,7 @@ services:
       --geth
       --poll-lifetime 180
       --jsonrpc-port 8545
+      --ws-port 8545
     ports:
       - 8545:8545
     volumes:
