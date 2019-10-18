@@ -27,7 +27,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  ropsten:
+  parity:
     image: parity/parity:stable
     container_name: ropsten_parity
     command:
@@ -46,8 +46,12 @@ services:
       --poll-lifetime 180
       --jsonrpc-port 8545
       --ws-port 8546
+      --ws-interface all
+      --ws-origins all
+      --ws-hosts all
     ports:
       - 8545:8545
+      - 8546:8546
     volumes:
       - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
     environment:
@@ -100,6 +104,7 @@ services:
       - ./vhost.d/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
+      - ./vhost.d/ropsten.district0x.io_location:/etc/nginx/vhost.d/ropsten.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
@@ -143,7 +148,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      - ropsten
+      - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
