@@ -7,13 +7,14 @@ services:
     command:
       --deterministic
       --mnemonic district0x
-      --port 8549
+      --port 8545
       --gasLimit 8000000
       --db /ganache-db
+      --noVMErrorsOnRPCResponse
     volumes:
       - /home/$USER/ganache-docker/:/ganache-db
     ports:
-      - 8549:8549
+      - 8545:8545
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
