@@ -36,7 +36,7 @@ services:
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
-    container_name: prod_ipfs-daemon
+    container_name: ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
