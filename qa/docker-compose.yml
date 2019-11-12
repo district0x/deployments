@@ -66,7 +66,8 @@ services:
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
-    container_name: ipfs-daemon
+    # container name needs to be ipfs-daemon to be reached on the docker network by the ipfs-server
+    container_name: qa_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
@@ -145,6 +146,8 @@ services:
   memefactory-server:
     image: district0x/memefactory-server:latest
     container_name: qa_memefactory-server
+    links:
+      - ipfs-daemon:qa_ipfs-daemon
     depends_on:
       - ipfs-daemon
       - ipfs-server
