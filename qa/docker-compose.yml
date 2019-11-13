@@ -78,6 +78,8 @@ services:
   ipfs-server:
     image: district0x/ipfs-server:latest
     container_name: qa_ipfs-server
+    links:
+      - ipfs-daemon:qa_ipfs-daemon
     depends_on:
       - ipfs-daemon
     networks:
@@ -146,8 +148,6 @@ services:
   memefactory-server:
     image: district0x/memefactory-server:latest
     container_name: qa_memefactory-server
-    links:
-      - ipfs-daemon:qa_ipfs-daemon
     depends_on:
       - ipfs-daemon
       - ipfs-server
