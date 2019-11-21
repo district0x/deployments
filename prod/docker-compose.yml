@@ -19,7 +19,7 @@ services:
       --logging info
       --geth
       --poll-lifetime 180
-      --jsonrpc-server-threads 16
+      --jsonrpc-server-threads 8
       --jsonrpc-port 8545
     ports:
       - 8545:8545

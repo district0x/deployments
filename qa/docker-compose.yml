@@ -44,7 +44,7 @@ services:
       --logging info
       --geth
       --poll-lifetime 180
-      --jsonrpc-server-threads 16
+      --jsonrpc-server-threads 8
       --jsonrpc-port 8545
       --ws-port 8546
       --ws-interface all
