@@ -27,43 +27,43 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  parity:
-    image: parity/parity:stable
-    container_name: ropsten_parity
-    command:
-      --chain ropsten
-      --base-path /home/parity/.local/share/io.parity.ethereum/
-      --jsonrpc-apis 'web3,eth,net,parity'
-      --jsonrpc-interface '0.0.0.0'
-      --jsonrpc-hosts none
-      --jsonrpc-cors '*'
-      --cache-size 6000
-      --db-compaction ssd
-      --mode active
-      --pruning fast
-      --logging info
-      --geth
-      --poll-lifetime 180
-      --jsonrpc-server-threads 8
-      --jsonrpc-port 8545
-      --ws-port 8546
-      --ws-interface all
-      --ws-origins all
-      --ws-hosts all
-    ports:
-      - 8545:8545
-      - 8546:8546
-    volumes:
-      - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
-    environment:
-      - VIRTUAL_PORT=8545
-      - VIRTUAL_HOST=ropsten.district0x.io
-      - LETSENCRYPT_HOST=ropsten.district0x.io
-      - LETSENCRYPT_EMAIL=filip@district0x.io
-      - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: always
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+  # parity:
+  #   image: parity/parity:stable
+  #   container_name: ropsten_parity
+  #   command:
+  #     --chain ropsten
+  #     --base-path /home/parity/.local/share/io.parity.ethereum/
+  #     --jsonrpc-apis 'web3,eth,net,parity'
+  #     --jsonrpc-interface '0.0.0.0'
+  #     --jsonrpc-hosts none
+  #     --jsonrpc-cors '*'
+  #     --cache-size 6000
+  #     --db-compaction ssd
+  #     --mode active
+  #     --pruning fast
+  #     --logging info
+  #     --geth
+  #     --poll-lifetime 180
+  #     --jsonrpc-server-threads 8
+  #     --jsonrpc-port 8545
+  #     --ws-port 8546
+  #     --ws-interface all
+  #     --ws-origins all
+  #     --ws-hosts all
+  #   ports:
+  #     - 8545:8545
+  #     - 8546:8546
+  #   volumes:
+  #     - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
+  #   environment:
+  #     - VIRTUAL_PORT=8545
+  #     - VIRTUAL_HOST=ropsten.district0x.io
+  #     - LETSENCRYPT_HOST=ropsten.district0x.io
+  #     - LETSENCRYPT_EMAIL=filip@district0x.io
+  #     - SSL_POLICY=AWS-TLS-1-2-2017-01
+  #   restart: always
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
@@ -153,7 +153,7 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      - parity
+      # - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
