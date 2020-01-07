@@ -5,7 +5,7 @@ services:
 
   rinkeby:
     image: ethereum/client-go:stable
-    container_name: rinkeby_geth
+    container_name: qa_rinkeby
     command:
       --rinkeby
       --rpc
@@ -23,47 +23,9 @@ services:
       - LETSENCRYPT_HOST=rinkeby.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: always
+    restart: "on-failure:5"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-
-  # parity:
-  #   image: parity/parity:stable
-  #   container_name: ropsten_parity
-  #   command:
-  #     --chain ropsten
-  #     --base-path /home/parity/.local/share/io.parity.ethereum/
-  #     --jsonrpc-apis 'web3,eth,net,parity'
-  #     --jsonrpc-interface '0.0.0.0'
-  #     --jsonrpc-hosts none
-  #     --jsonrpc-cors '*'
-  #     --cache-size 6000
-  #     --db-compaction ssd
-  #     --mode active
-  #     --pruning fast
-  #     --logging info
-  #     --geth
-  #     --poll-lifetime 180
-  #     --jsonrpc-server-threads 8
-  #     --jsonrpc-port 8545
-  #     --ws-port 8546
-  #     --ws-interface all
-  #     --ws-origins all
-  #     --ws-hosts all
-  #   ports:
-  #     - 8545:8545
-  #     - 8546:8546
-  #   volumes:
-  #     - /home/$USER/ropsten-docker/:/home/parity/.local/share/io.parity.ethereum/
-  #   environment:
-  #     - VIRTUAL_PORT=8545
-  #     - VIRTUAL_HOST=ropsten.district0x.io
-  #     - LETSENCRYPT_HOST=ropsten.district0x.io
-  #     - LETSENCRYPT_EMAIL=filip@district0x.io
-  #     - SSL_POLICY=AWS-TLS-1-2-2017-01
-  #   restart: always
-  #   labels:
-  #     - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
@@ -109,7 +71,6 @@ services:
       - ./vhost.d/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
-      - ./vhost.d/ropsten.district0x.io_location:/etc/nginx/vhost.d/ropsten.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
@@ -118,7 +79,7 @@ services:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
       - DEFAULT_HOST=qa.district0x.io
-    restart: always
+    restart: "on-failure:5"
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:v1.12-rc.1
@@ -132,7 +93,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: always
+    restart: "on-failure:5"
 
   watchtower:
     image: v2tec/watchtower:latest
@@ -153,7 +114,6 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      # - parity
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
