@@ -58,9 +58,6 @@ services:
       --wsapi db,eth,net,web3
       --wsaddr "0.0.0.0"
       --wsorigins "*"
-    ports:
-      - 8545:8545
-      - 8546:8546
     volumes:
       - /home/$USER/mainnet-docker/:/root/.ethereum
     environment:
