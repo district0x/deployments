@@ -21,8 +21,13 @@ services:
       --poll-lifetime 180
       --jsonrpc-server-threads 8
       --jsonrpc-port 8545
+      --ws-port 8546
+      --ws-interface all
+      --ws-origins all
+      --ws-hosts all
     ports:
       - 8545:8545
+      - 8546:8546
     volumes:
       - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
     environment:
@@ -82,6 +87,7 @@ services:
       - ./vhost.d/contribution.district0x.io:/etc/nginx/vhost.d/contribution.district0x.io
       - ./vhost.d/vote.district0x.io:/etc/nginx/vhost.d/vote.district0x.io
       - ./vhost.d/ipfs.district0x.io:/etc/nginx/vhost.d/ipfs.district0x.io
+      - ./vhost.d/mainnet.district0x.io_location:/etc/nginx/vhost.d/mainnet.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
