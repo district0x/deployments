@@ -15,6 +15,14 @@ services:
       --rpcport 8545
       --rpccorsdomain "*"
       --rpcvhosts "*"
+      --ws
+      --ws-port 8546
+      --ws-interface all
+      --ws-origins all
+      --ws-hosts all
+    ports:
+      - 8545:8545
+      - 8546:8546
     volumes:
       - /home/$USER/rinkeby-docker/:/root/.ethereum
     environment:
@@ -72,6 +80,8 @@ services:
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io_location:/etc/nginx/vhost.d/ipfs.qa.district0x.io_location
+      - ./vhost.d/rinkeby.district0x.io_location:/etc/nginx/vhost.d/rinkeby.district0x.io_location
+      - ./vhost.d/ropsten.district0x.io_location:/etc/nginx/vhost.d/ropsten.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
