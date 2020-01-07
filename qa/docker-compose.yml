@@ -18,6 +18,7 @@ services:
       --ws
       --wsport 8546
       --wsapi db,eth,net,web3
+      --wsaddr "0.0.0.0"
       --wsorigins "*"
     ports:
       - 8545:8545
