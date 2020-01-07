@@ -87,7 +87,6 @@ services:
       - ./vhost.d/contribution.district0x.io:/etc/nginx/vhost.d/contribution.district0x.io
       - ./vhost.d/vote.district0x.io:/etc/nginx/vhost.d/vote.district0x.io
       - ./vhost.d/ipfs.district0x.io:/etc/nginx/vhost.d/ipfs.district0x.io
-      - ./vhost.d/ipfs.district0x.io_location:/etc/nginx/vhost.d/ipfs.district0x.io_location
       - ./vhost.d/mainnet.district0x.io_location:/etc/nginx/vhost.d/mainnet.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
