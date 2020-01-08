@@ -36,7 +36,7 @@ services:
       - LETSENCRYPT_HOST=mainnet.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
@@ -63,7 +63,7 @@ services:
     environment:
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
