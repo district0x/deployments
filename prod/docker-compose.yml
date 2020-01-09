@@ -91,7 +91,7 @@ services:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
       - DEFAULT_HOST=prod.district0x.io
-    restart: "on-failure:5"
+    restart: always
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
@@ -105,7 +105,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: "on-failure:5"
+    restart: always
 
   watchtower:
     image: v2tec/watchtower:latest
