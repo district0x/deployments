@@ -35,6 +35,38 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
+  ropsten:
+    image: ethereum/client-go:stable
+    container_name: qa_ropsten
+    command:
+      --ropsten
+      --cache=6000
+      --rpc
+      --rpcport 8547
+      --rpcapi db,eth,net,web3
+      --rpcaddr "0.0.0.0"
+      --rpccorsdomain "*"
+      --rpcvhosts "*"
+      --ws
+      --wsport 8548
+      --wsapi db,eth,net,web3
+      --wsaddr "0.0.0.0"
+      --wsorigins "*"
+    ports:
+      - 8547:8547
+      - 8548:8548
+    volumes:
+      - /home/$USER/ropsten-docker/:/root/.ethereum
+    environment:
+      - VIRTUAL_PORT=8547
+      - VIRTUAL_HOST=ropsten.district0x.io
+      - LETSENCRYPT_HOST=ropsten.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=AWS-TLS-1-2-2017-01
+    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
     # container name needs to be ipfs-daemon to be reached on the docker network by the ipfs-server
