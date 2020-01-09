@@ -66,7 +66,7 @@ services:
       - SSL_POLICY=AWS-TLS-1-2-2017-01
 
   nginx:
-    image: jwilder/nginx-proxy:latest
+    image: jwilder/nginx-proxy:alpine
     container_name: prod_nginx
     ports:
       - 80:80
