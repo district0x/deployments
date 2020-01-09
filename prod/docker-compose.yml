@@ -4,45 +4,6 @@ services:
   # --- BASE SERVICES ---#
 
   mainnet:
-    image: parity/parity:stable
-    container_name: mainnet_parity
-    command:
-      --base-path /home/parity/.local/share/io.parity.ethereum/
-      --jsonrpc-apis 'web3,eth,net,parity'
-      --jsonrpc-interface '0.0.0.0'
-      --jsonrpc-hosts none
-      --jsonrpc-cors '*'
-      --cache-size 6000
-      --db-compaction ssd
-      --mode active
-      --pruning fast
-      --logging info
-      --geth
-      --poll-lifetime 180
-      --jsonrpc-server-threads 8
-      --jsonrpc-port 8545
-      --ws-port 8546
-      --ws-interface all
-      --ws-origins all
-      --ws-hosts all
-    ports:
-      - 8545:8545
-      - 8546:8546
-    volumes:
-      - /home/$USER/parity-docker/:/home/parity/.local/share/io.parity.ethereum/
-    environment:
-      - VIRTUAL_PORT=8545
-      - VIRTUAL_HOST=mainnet.district0x.io
-      - LETSENCRYPT_HOST=mainnet.district0x.io
-      - LETSENCRYPT_EMAIL=filip@district0x.io
-      - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: always
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  # TODO : rename to mainnet after fully synced
-  # TODO : expose
-  mainnet-geth:
     image: ethereum/client-go:stable
     container_name: prod_mainnet
     command:
@@ -58,9 +19,16 @@ services:
       --wsapi db,eth,net,web3
       --wsaddr "0.0.0.0"
       --wsorigins "*"
+    ports:
+      - 8545:8545
+      - 8546:8546
     volumes:
       - /home/$USER/mainnet-docker/:/root/.ethereum
     environment:
+      - VIRTUAL_PORT=8545
+      - VIRTUAL_HOST=mainnet.district0x.io
+      - LETSENCRYPT_HOST=mainnet.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
