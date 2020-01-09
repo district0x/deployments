@@ -2,7 +2,7 @@ version: "3"
 services:
 
   ganache:
-    image: trufflesuite/ganache-cli:latest
+    image: trufflesuite/ganache-cli:6.1.7
     container_name: dev_ganache
     command:
       --deterministic
