@@ -24,12 +24,6 @@ services:
       - 8546:8546
     volumes:
       - /home/$USER/mainnet-docker/:/root/.ethereum
-    environment:
-      - VIRTUAL_PORT=8545
-      - VIRTUAL_HOST=mainnet.district0x.io
-      - LETSENCRYPT_HOST=mainnet.district0x.io
-      - LETSENCRYPT_EMAIL=filip@district0x.io
-      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -82,7 +76,6 @@ services:
       - ./vhost.d/vote.district0x.io:/etc/nginx/vhost.d/vote.district0x.io
       - ./vhost.d/ipfs.district0x.io:/etc/nginx/vhost.d/ipfs.district0x.io
       - ./vhost.d/ipfs.district0x.io_location:/etc/nginx/vhost.d/ipfs.district0x.io_location
-      - ./vhost.d/mainnet.district0x.io_location:/etc/nginx/vhost.d/mainnet.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
