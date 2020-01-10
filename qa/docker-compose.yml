@@ -25,12 +25,6 @@ services:
       - 8546:8546
     volumes:
       - /home/$USER/rinkeby-docker/:/root/.ethereum
-    environment:
-      - VIRTUAL_PORT=8545
-      - VIRTUAL_HOST=rinkeby.district0x.io
-      - LETSENCRYPT_HOST=rinkeby.district0x.io
-      - LETSENCRYPT_EMAIL=filip@district0x.io
-      - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -57,12 +51,6 @@ services:
       - 8548:8548
     volumes:
       - /home/$USER/ropsten-docker/:/root/.ethereum
-    # environment:
-    #   - VIRTUAL_PORT=8547
-    #   - VIRTUAL_HOST=ropsten.district0x.io
-    #   - LETSENCRYPT_HOST=ropsten.district0x.io
-    #   - LETSENCRYPT_EMAIL=filip@district0x.io
-    #   - SSL_POLICY=AWS-TLS-1-2-2017-01
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -112,8 +100,6 @@ services:
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io_location:/etc/nginx/vhost.d/ipfs.qa.district0x.io_location
-      - ./vhost.d/rinkeby.district0x.io_location:/etc/nginx/vhost.d/rinkeby.district0x.io_location
-      # - ./vhost.d/ropsten.district0x.io_location:/etc/nginx/vhost.d/ropsten.district0x.io_location
       - /home/$USER/nginx-docker/html:/usr/share/nginx/html
       - /home/$USER/nginx-docker/htpasswd:/etc/nginx/htpasswd
       - /home/$USER/nginx-docker/conf.d:/etc/nginx/conf.d
