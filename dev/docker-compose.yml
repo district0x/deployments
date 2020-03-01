@@ -2,15 +2,16 @@ version: "3"
 services:
 
   ganache:
-    image: trufflesuite/ganache-cli:6.1.7
+    image: trufflesuite/ganache-cli:v6.7.0
     container_name: dev_ganache
     command:
       --deterministic
       --mnemonic district0x
       --port 8545
-      --gasLimit 8000000
       --db /ganache-db
       --noVMErrorsOnRPCResponse
+      --gasLimit 80000000
+      --allowUnlimitedContractSize
     volumes:
       - /home/$USER/ganache-docker/:/ganache-db
     ports:
