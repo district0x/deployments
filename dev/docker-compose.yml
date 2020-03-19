@@ -10,7 +10,7 @@ services:
       --port 8545
       --db /ganache-db
       --noVMErrorsOnRPCResponse
-      --gasLimit 80000000
+      --gasLimit 70000000
       --allowUnlimitedContractSize
     volumes:
       - /home/$USER/ganache-docker/:/ganache-db
