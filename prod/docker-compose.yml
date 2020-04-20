@@ -3,30 +3,30 @@ services:
 
   # --- BASE SERVICES ---#
 
-  mainnet:
-    image: ethereum/client-go:stable
-    container_name: prod_mainnet
-    command:
-      --cache=6000
-      --rpc
-      --rpcport 8545
-      --rpcapi db,eth,net,web3
-      --rpcaddr "0.0.0.0"
-      --rpccorsdomain "*"
-      --rpcvhosts "*"
-      --ws
-      --wsport 8546
-      --wsapi db,eth,net,web3
-      --wsaddr "0.0.0.0"
-      --wsorigins "*"
-    ports:
-      - 8545:8545
-      - 8546:8546
-    volumes:
-      - /home/$USER/mainnet-docker/:/root/.ethereum
-    restart: always
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+  # mainnet:
+  #   image: ethereum/client-go:stable
+  #   container_name: prod_mainnet
+  #   command:
+  #     --cache=6000
+  #     --rpc
+  #     --rpcport 8545
+  #     --rpcapi db,eth,net,web3
+  #     --rpcaddr "0.0.0.0"
+  #     --rpccorsdomain "*"
+  #     --rpcvhosts "*"
+  #     --ws
+  #     --wsport 8546
+  #     --wsapi db,eth,net,web3
+  #     --wsaddr "0.0.0.0"
+  #     --wsorigins "*"
+  #   ports:
+  #     - 8545:8545
+  #     - 8546:8546
+  #   volumes:
+  #     - /home/$USER/mainnet-docker/:/root/.ethereum
+  #   restart: always
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
 
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
@@ -37,7 +37,7 @@ services:
       - ipfs-net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    restart: "on-failure:5"
+    restart: "on-failure:3"
 
   ipfs-server:
     image: district0x/ipfs-server:latest
@@ -192,13 +192,16 @@ services:
       - SSL_POLICY=Mozilla-Modern
 
   ethlance-emailer:
-    image: district0x/ethlance-emailer:release
+    image: district0x/ethlance-emailer:latest
     container_name: prod_ethlance-emailer
-    depends_on:
-      - mainnet
+    volumes:
+      - /home/$USER/logs:/logs
+      - /home/$USER/configs:/configs
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    restart: "on-failure:5"
+    environment:
+      - CONFIG=/configs/emailer.config.edn
+    restart: "on-failure:3"
 
   # --- MEMEFACTORY SERVICES ---#
 
@@ -223,7 +226,7 @@ services:
       - LETSENCRYPT_HOST=api.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: "on-failure:3"
     stop_signal: SIGTERM
 
   memefactory-ui:
@@ -253,7 +256,6 @@ services:
     depends_on:
       - ipfs-daemon
       - ipfs-server
-      - mainnet
     volumes:
       - /home/$USER/logs:/logs
       - /home/$USER/configs:/configs
@@ -269,7 +271,7 @@ services:
       - LETSENCRYPT_HOST=api.registry.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: "on-failure:3"
 
   registry-ui:
     image: district0x/registry-ui:release
