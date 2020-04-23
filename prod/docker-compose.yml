@@ -178,7 +178,7 @@ services:
   # --- ETHLANCE SERVICES ---#
 
   ethlance-ui:
-    image: district0x/ethlance-ui:release
+    image: district0x/ethlance-ui:latest
     container_name: prod_ethlance-ui
     depends_on:
      - nginx
