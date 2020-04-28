@@ -1,1 +1,10 @@
 add_header X-Frame-Options sameorigin always;
+
+location ^~ /.well-known/acme-challenge/ {
+    auth_basic off;
+    auth_request off;
+    allow all;
+    root /usr/share/nginx/html;
+    try_files $uri =404;
+    break;
+}

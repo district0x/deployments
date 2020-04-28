@@ -3,31 +3,6 @@ services:
 
   # --- BASE SERVICES ---#
 
-  # mainnet:
-  #   image: ethereum/client-go:stable
-  #   container_name: prod_mainnet
-  #   command:
-  #     --cache=6000
-  #     --rpc
-  #     --rpcport 8545
-  #     --rpcapi db,eth,net,web3
-  #     --rpcaddr "0.0.0.0"
-  #     --rpccorsdomain "*"
-  #     --rpcvhosts "*"
-  #     --ws
-  #     --wsport 8546
-  #     --wsapi db,eth,net,web3
-  #     --wsaddr "0.0.0.0"
-  #     --wsorigins "*"
-  #   ports:
-  #     - 8545:8545
-  #     - 8546:8546
-  #   volumes:
-  #     - /home/$USER/mainnet-docker/:/root/.ethereum
-  #   restart: always
-  #   labels:
-  #     - "com.centurylinklabs.watchtower.enable=true"
-
   ipfs-daemon:
     image: district0x/ipfs-daemon:latest
     container_name: prod_ipfs-daemon
