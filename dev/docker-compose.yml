@@ -18,7 +18,8 @@ services:
       - 8545:8545
 
   ipfs-daemon:
-    image: district0x/ipfs-daemon:latest
+    image: ipfs/go-ipfs:v0.5.1
+    command: ["daemon", "--migrate=true", "--enable-pubsub-experiment"]
     container_name: dev_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
