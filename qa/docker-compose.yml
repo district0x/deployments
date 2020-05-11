@@ -4,19 +4,17 @@ services:
   # --- BASE SERVICES ---#
 
   ipfs-daemon:
-    image: district0x/ipfs-daemon:latest
+    image: district0x/ipfs-daemon:v0.4.21
     # container name needs to be ipfs-daemon to be reached on the docker network by the ipfs-server
     container_name: qa_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    restart: "on-failure:5"
+    restart: "on-failure:3"
 
   ipfs-server:
-    image: district0x/ipfs-server:latest
+    image: district0x/ipfs-server:v0.4.21
     container_name: qa_ipfs-server
     links:
       - ipfs-daemon:qa_ipfs-daemon
@@ -27,8 +25,6 @@ services:
       - default
     volumes:
       - /home/$USER/nginx-docker/cache:/etc/nginx/cache
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=ipfs.qa.district0x.io
       - LETSENCRYPT_HOST=ipfs.qa.district0x.io
@@ -56,7 +52,7 @@ services:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
       - DEFAULT_HOST=qa.district0x.io
-    restart: "on-failure:5"
+    restart: always
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:v1.12-rc.1
@@ -70,7 +66,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: "on-failure:5"
+    restart: always
 
   watchtower:
     image: v2tec/watchtower:latest
@@ -106,7 +102,7 @@ services:
       - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: "on-failure:3"
     stop_signal: SIGTERM
 
   memefactory-ui:
@@ -155,7 +151,7 @@ services:
       - LETSENCRYPT_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:5"
+    restart: "on-failure:3"
 
   registry-ui:
     image: district0x/registry-ui:latest

@@ -4,18 +4,16 @@ services:
   # --- BASE SERVICES ---#
 
   ipfs-daemon:
-    image: district0x/ipfs-daemon:latest
+    image: district0x/ipfs-daemon:v0.4.21
     container_name: prod_ipfs-daemon
     volumes:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     restart: "on-failure:3"
 
   ipfs-server:
-    image: district0x/ipfs-server:latest
+    image: district0x/ipfs-server:v0.4.21
     container_name: prod_ipfs-server
     links:
       - ipfs-daemon:prod_ipfs-daemon
@@ -26,8 +24,6 @@ services:
       - default
     volumes:
       - /home/$USER/nginx-docker/cache:/etc/nginx/cache
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - VIRTUAL_HOST=ipfs.district0x.io
       - LETSENCRYPT_HOST=ipfs.district0x.io
