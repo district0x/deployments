@@ -79,6 +79,14 @@ services:
       - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=QA-Watchtower-Service
     command: --label-enable --cleanup --interval 300
 
+  # TODO : temporary, before web3-server reconnection is fixed
+  restarter:
+    image: docker
+    container_name: dev_restarter
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    command: ["/bin/sh", "-c", "while true; do sleep 86400; docker restart qa_memefactory-server qa_registry-server; done"]
+    restart: unless-stopped
+
   # --- MEMEFACTORY SERVICES ---#
 
   memefactory-server:
@@ -102,8 +110,7 @@ services:
       - LETSENCRYPT_HOST=api.memefactory.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:3"
-    stop_signal: SIGTERM
+    restart: unless-stopped
 
   memefactory-ui:
     image: district0x/memefactory-ui:latest
@@ -151,7 +158,7 @@ services:
       - LETSENCRYPT_HOST=api.registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: "on-failure:3"
+    restart: unless-stopped
 
   registry-ui:
     image: district0x/registry-ui:latest
