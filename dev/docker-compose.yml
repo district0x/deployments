@@ -16,6 +16,7 @@ services:
       - /home/$USER/ganache-docker/:/ganache-db
     ports:
       - 8545:8545
+      - 8549:8545
 
   ipfs-daemon:
     image: ipfs/go-ipfs:v0.5.1
@@ -26,3 +27,16 @@ services:
     ports:
       - 8080:8080
       - 5001:5001
+
+  postgresql:
+    image: postgres
+    container_name: dev_postgresql
+    ports:
+      - 127.0.0.1:5432:5432
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=user
+      - POSTGRES_DB=ethlance
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - /home/$USER/postgres-docker:/var/lib/postgresql/data
