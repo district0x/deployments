@@ -205,7 +205,7 @@ services:
       - LETSENCRYPT_HOST=api.memefactory.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: unless-stopped
+    restart: on-failure:5
 
   memefactory-ui:
     image: district0x/memefactory-ui:release
@@ -249,7 +249,7 @@ services:
       - LETSENCRYPT_HOST=api.registry.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: unless-stopped
+    restart: on-failure:5
 
   registry-ui:
     image: district0x/registry-ui:release
