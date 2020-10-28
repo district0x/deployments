@@ -10,7 +10,7 @@ services:
       - /home/$USER/ipfs-docker:/data/ipfs
     networks:
       - ipfs-net
-    restart: "on-failure:3"
+    restart: on-failure:3
 
   ipfs-server:
     image: district0x/ipfs-server:v0.4.21
@@ -180,7 +180,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - CONFIG=/configs/emailer.config.edn
-    restart: unless-stopped
+    restart: on-failure:3
 
   # --- MEMEFACTORY SERVICES ---#
 
@@ -249,7 +249,7 @@ services:
       - LETSENCRYPT_HOST=api.registry.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=AWS-TLS-1-2-2017-01
-    restart: on-failure:5
+    restart: on-failure:3
 
   registry-ui:
     image: district0x/registry-ui:release
