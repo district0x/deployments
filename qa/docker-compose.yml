@@ -41,6 +41,7 @@ services:
       - /home/$USER/nginx-docker/certs:/etc/nginx/certs
       - /home/$USER/nginx-docker/vhost.d:/etc/nginx/vhost.d
       - ./vhost.d/memefactory.qa.district0x.io:/etc/nginx/vhost.d/memefactory.qa.district0x.io
+      - ./vhost.d/namebazaar.qa.district0x.io:/etc/nginx/vhost.d/namebazaar.qa.district0x.io
       - ./vhost.d/registry.qa.district0x.io:/etc/nginx/vhost.d/registry.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io:/etc/nginx/vhost.d/ipfs.qa.district0x.io
       - ./vhost.d/ipfs.qa.district0x.io_location:/etc/nginx/vhost.d/ipfs.qa.district0x.io_location
@@ -66,7 +67,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: always
+    restart: alwayss
 
   watchtower:
     image: v2tec/watchtower:latest
@@ -172,6 +173,23 @@ services:
       - LETSENCRYPT_HOST=registry.qa.district0x.io
       - LETSENCRYPT_EMAIL=filip@district0x.io
       - SSL_POLICY=Mozilla-Modern
+
+  # --- NAMEBAZAAR SERVICES ---#
+
+  namebazaar-ui:
+    image: district0x/namebazaar-ui:release
+    container_name: qa_namebazaar-ui
+    depends_on:
+     - nginx
+     - letsencrypt
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    environment:
+      - VIRTUAL_HOST=namebazaar.qa.district0x.io
+      - LETSENCRYPT_HOST=namebazaar.qa.district0x.io
+      - LETSENCRYPT_EMAIL=filip@district0x.io
+      - SSL_POLICY=Mozilla-Modern
+
 
 networks:
   ipfs-net:
