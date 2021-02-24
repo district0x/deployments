@@ -67,7 +67,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       # AND
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: alwayss
+    restart: always
 
   watchtower:
     image: v2tec/watchtower:latest
